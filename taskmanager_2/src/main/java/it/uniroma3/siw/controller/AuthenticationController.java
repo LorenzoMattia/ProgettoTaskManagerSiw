@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,8 +44,17 @@ public class AuthenticationController {
 								@Valid @ModelAttribute("Credentials") Credentials credentials,
 								BindingResult credentialsBindingResult,
 								Model model ) {
+		this.userValidator.validate(user, userBindingResult);
+		this.credentialsValidator.validate(credentials, credentialsBindingResult);
 		
+		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+			credentials.setUser(user);
+			credentialsService.saveCredentials(credentials);
+			return "registrationSuccesful";
+		}
+		return "registerUser";
 	}
+	
 	
 	
  }
