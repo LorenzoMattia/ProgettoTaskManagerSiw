@@ -11,6 +11,43 @@
 	<form id = "registerUserForm"
 		  th:action = "@{/users/register}"
 		  method= "POST">
+		<table>
+		  	<tr>
+		  		<td><label for="userNameInput">Username</label></td>
+		  		<td><input id=userNameInput type="text" placeholder="USERNAME" required
+		  				th:field="${Credentials.Username}"></input></td>
+		  		<td th:if="${#fields.hasErrors('Credentials.Username')}"
+		  			th:errors="${Credentials.Username}"
+		  			th:style="'Color:red'"></td>
+		  	</tr>
+		  	<tr>
+		  		<td><label for="passwordInput">Password</label></td>
+		  		<td><input id=passwordInput type="text" placeholder="PASSWORD" required
+		  				th:field="${Credentials.Password}"></input></td>
+		  		<td th:if="${#fields.hasErrors('Credentials.Password')}"
+		  			th:errors="${Credentials.Password}"
+		  			th:style="'Color:red'"></td>
+		  	</tr>
+		  	<tr>
+		  		<td><label for="firstNameInput">Firstname</label></td>
+		  		<td><input id=firstNameInput type="text" placeholder="FIRSTNAME" required
+		  				th:field="${User.Firstname}"></input></td>
+		  		<td th:if="${#fields.hasErrors('User.Firstname')}"
+		  			th:errors="${User.Firstname}"
+		  			th:style="'Color:red'"></td>
+		  	</tr>
+		  	<tr>
+		  		<td><label for="lastNameInput">Lastname</label></td>
+		  		<td><input id=lastNameInput type="text" placeholder="LASTNAME" required
+		  				th:field="${User.Lastname}"></input></td>
+		  		<td th:if="${#fields.hasErrors('User.Lastname')}"
+		  			th:errors="${User.Lastname}"
+		  			th:style="'Color:red'"></td>
+		  	</tr>
+		  	<tr>
+		  		<td><button type="submit">Register</button></td>
+		  	</tr>
+		</table>
 	</form>
 </body>
 
