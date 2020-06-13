@@ -1,3 +1,4 @@
 
 taskmanager_2/src/main/resources/application.properties
 taskmanager_2/src/main/resources/application.properties
+*.properties
