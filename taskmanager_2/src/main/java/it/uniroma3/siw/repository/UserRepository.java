@@ -13,8 +13,6 @@ import it.uniroma3.siw.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User,Long> {
 	
-	public Optional<User> findByUsername(String username);
-	
 	public List<User> findByVisibleProjects(Project project);
 
 }

@@ -25,12 +25,6 @@ public class UserService {
 	}
 	
 	@Transactional
-	public User getUser(String username) {
-		Optional<User> result = this.userRepository.findByUsername(username);
-		return result.orElse(null);
-	}
-	
-	@Transactional
 	public User saveUser(User user) {
 		return this.userRepository.save(user);
 	}
