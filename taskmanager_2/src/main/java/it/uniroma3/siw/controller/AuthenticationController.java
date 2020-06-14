@@ -37,7 +37,6 @@ public class AuthenticationController {
 		return "registerUser";
 	}
 	
-	//@RequestMapping(value = { "/users/register" }, method = RequestMethod.POST)
 	@RequestMapping(value = { "/users/register" }, method = RequestMethod.POST)
 	public String registerUser( @Valid @ModelAttribute("User") User user,
 								BindingResult userBindingResult,
@@ -50,7 +49,7 @@ public class AuthenticationController {
 		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
 			credentials.setUser(user);
 			credentialsService.saveCredentials(credentials);
-			return "registrationSuccesful";
+			return "registrationSuccessful";
 		}
 		return "registerUser";
 	}

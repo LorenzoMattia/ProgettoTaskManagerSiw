@@ -32,7 +32,7 @@ public class Project {
 	@ManyToMany
 	List<User> members;
 	
-	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="project_id")
 	List<Task> tasks;
 	

@@ -1,5 +1,6 @@
 package it.uniroma3.siw.services;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -38,4 +39,10 @@ public class ProjectService {
 		return this.projectRepository.save(p);
 	}
 	
+	@Transactional
+	public List<Project> retrieveProjectsOwnedBy(User loggedUser) {
+		List<Project> projectsList = (this.projectRepository.findByOwner(loggedUser)); //da rivedere!!!!
+		return projectsList;
+		
+	}
 }

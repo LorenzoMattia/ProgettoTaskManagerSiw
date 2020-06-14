@@ -26,14 +26,17 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/","/index", "/login", "/users/resgister").permitAll()
-		.antMatchers(HttpMethod.POST, "/login", "users/register").permitAll()
-		.antMatchers(HttpMethod.GET, "/admin").hasAnyAuthority(Credentials.ADMIN_ROLE) //ricordiamocelo
+		.antMatchers(HttpMethod.GET, "/","/index", "/login", "/users/register").permitAll()
+		.antMatchers(HttpMethod.POST, "/login", "/users/register").permitAll()
+		.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(Credentials.ADMIN_ROLE) //qualsiasi url che cominci con /admin
+		.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(Credentials.ADMIN_ROLE)//ricordiamocelo
 		.anyRequest().authenticated()
 		.and().formLogin()
 		.defaultSuccessUrl("/home")
 		.and().logout().logoutUrl("/logout")
-		.logoutSuccessUrl("/index");
+		.logoutSuccessUrl("/index")
+		.invalidateHttpSession(true)
+		.clearAuthentication(true).permitAll();
 	}
 	
 	@Override

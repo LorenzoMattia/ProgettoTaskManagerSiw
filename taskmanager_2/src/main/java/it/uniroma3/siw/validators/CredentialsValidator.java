@@ -12,7 +12,7 @@ import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.services.CredentialsService;
 
 @Component
-public class CredentialsValidator implements Validator {
+public class CredentialsValidator implements Validator { //bisognerebbe spostare il package validators in controller e rinominarlo in validation
 
 	@Autowired
 	CredentialsService credentialsService;
