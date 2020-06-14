@@ -1,5 +1,6 @@
 package it.uniroma3.siw.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,15 @@ public class CredentialsService {
 	public Credentials getCredentials(String username) {
 		Optional<Credentials> result = this.credentialsRepository.findByUsername(username);
 		return result.orElse(null);
+	}
+
+	@Transactional
+	public List<Credentials> getAllCredentials() {
+		return (List<Credentials>) this.credentialsRepository.findAll();
+	}
+
+	public void deleteCredentials(String username) {
+		this.credentialsRepository.deleteByUsername(username);
+		
 	}
 }

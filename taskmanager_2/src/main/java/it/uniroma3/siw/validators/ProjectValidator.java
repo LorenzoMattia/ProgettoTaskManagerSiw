@@ -19,20 +19,19 @@ public class ProjectValidator implements Validator {
 	}
 
 	@Override
-	public void validate(Object o, Errors errors) {
-		
-		Project project = (Project) o;
-		
-		String name = project.getName().trim();
-		String description = project.getDescription().trim();
+	public void validate(Object target, Errors errors) {
+		Project p = (Project) target;
+		String name = p.getName().trim();
+		String description = p.getDescription().trim();
 		
 		if(name.isEmpty())
-			errors.rejectValue("name", "required");
-		else if(name.length() < this.MIN_NAME_LENGTH || name.length() > this.MAX_DESCRIPTION_LENGTH)
-			errors.rejectValue("name", "size");
+			errors.reject("name", "required");
+		else if(name.length()<this.MIN_NAME_LENGTH || name.length()>this.MAX_NAME_LENGTH)
+			errors.reject("name", "size");
 		
-		if(description.length() > this.MAX_DESCRIPTION_LENGTH)
-			errors.rejectValue("description", "size");
+		if(description.length()>this.MAX_DESCRIPTION_LENGTH)
+			errors.reject("description", "size");
+		
 	}
-	
+
 }

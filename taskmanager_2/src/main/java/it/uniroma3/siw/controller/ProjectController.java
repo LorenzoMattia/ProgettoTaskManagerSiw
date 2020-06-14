@@ -53,12 +53,14 @@ public class ProjectController {
 	public String project(Model model, @PathVariable Long projectId) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = projectService.getProject(projectId);
-		if(projectId == null)
+		if(projectId == null) {
 			return "redirect:/projects";
+		}
 		
 		List<User> members = userService.getMembers(project);
-		if(!project.getOwner().equals(loggedUser) && !members.contains(loggedUser))
+		if(!project.getOwner().equals(loggedUser) && !members.contains(loggedUser)) {
 			return "redirect:/projects";
+		}
 		
 		model.addAttribute("user", loggedUser);
 		model.addAttribute("project", project);
@@ -69,10 +71,8 @@ public class ProjectController {
 	
 	@RequestMapping(value = { "/projects/add" }, method = RequestMethod.GET)
 	public String createProjectForm(Model model) {
-		//ricordiamocelo
-		//lui mette nel modello anche l'utenteloggato
+		model.addAttribute(sessionData.getLoggedUser());
 		model.addAttribute("project", new Project());
-			
 		return "addProject";
 	}
 	
@@ -80,16 +80,14 @@ public class ProjectController {
 	public String createProject(@Valid @ModelAttribute("project") Project project,
 								BindingResult projectBindingResult,
 								Model model) {
-		User loggedUser = sessionData.getLoggedUser();
-		
+		User loggedUser = this.sessionData.getLoggedUser();
 		projectValidator.validate(project, projectBindingResult);
 		if(!projectBindingResult.hasErrors()) {
 			project.setOwner(loggedUser);
-			projectService.saveProject(project);
+			this.projectService.saveProject(project);
 			return "redirect:/project/" + project.getId();
 		}
-		//ricordiamoci
-		//lui mette nel modello l'utente corrente
+		model.addAttribute(loggedUser);
 		return "addProject";
 	}
 }

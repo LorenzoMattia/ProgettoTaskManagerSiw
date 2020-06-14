@@ -23,7 +23,7 @@ public class UserController {
 		return "home";
 	}
 	
-	@RequestMapping(value = { "/users/me "}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/users/me"}, method = RequestMethod.GET)
 	public String me(Model model) {
 		User loggedUser = this.sessionData.getLoggedUser();
 		Credentials credentials = this.sessionData.getLoggedCredentials();
