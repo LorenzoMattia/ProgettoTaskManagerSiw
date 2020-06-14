@@ -25,12 +25,12 @@ public class ProjectValidator implements Validator {
 		String description = p.getDescription().trim();
 		
 		if(name.isEmpty())
-			errors.reject("name", "required");
+			errors.rejectValue("name", "required");
 		else if(name.length()<this.MIN_NAME_LENGTH || name.length()>this.MAX_NAME_LENGTH)
-			errors.reject("name", "size");
+			errors.rejectValue("name", "size");
 		
 		if(description.length()>this.MAX_DESCRIPTION_LENGTH)
-			errors.reject("description", "size");
+			errors.rejectValue("description", "size");
 		
 	}
 

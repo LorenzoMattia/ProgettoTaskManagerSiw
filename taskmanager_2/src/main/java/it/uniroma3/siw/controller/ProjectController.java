@@ -71,7 +71,7 @@ public class ProjectController {
 	
 	@RequestMapping(value = { "/projects/add" }, method = RequestMethod.GET)
 	public String createProjectForm(Model model) {
-		model.addAttribute(sessionData.getLoggedUser());
+		//model.addAttribute(sessionData.getLoggedUser());
 		model.addAttribute("project", new Project());
 		return "addProject";
 	}
@@ -87,7 +87,7 @@ public class ProjectController {
 			this.projectService.saveProject(project);
 			return "redirect:/project/" + project.getId();
 		}
-		model.addAttribute(loggedUser);
+		//model.addAttribute(loggedUser);
 		return "addProject";
 	}
 }
