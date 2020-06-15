@@ -31,7 +31,7 @@ public class UserService {
 	}
 	
 	@Transactional
-	public List<User> findAllUsers(User user) {
+	public List<User> findAllUsers() {
 		Iterable<User> i = this.userRepository.findAll();
 		ArrayList<User> lista = new ArrayList<>();
 		for(User u : i)
@@ -41,5 +41,9 @@ public class UserService {
 
 	public List<User> getMembers(Project project) {
 		return this.userRepository.findByVisibleProjects(project);
+	}
+	
+	public List<User> getNotMembers(Project project) {
+		return this.userRepository.findByNotVisibleProjects(project.getId());
 	}
 }
