@@ -24,10 +24,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
-	@Column(nullable = false, unique = true)
-	String username;
-	@Column(nullable = false, unique = true)
-	String password;
+	
 	@Column(nullable = false)
 	String firstname;
 	@Column(nullable = false)
@@ -42,8 +39,6 @@ public class User {
 	List<Project> visibleProjects; 
 	
 	public User(String username, String password, String firstname, String lastname) {
-		this.username = username;
-		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
 	}
@@ -61,26 +56,6 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-
-	public String getUsername() {
-		return username;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 
@@ -137,7 +112,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
+		return "User [id=" + id + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", creationTimeStamp=" + creationTimeStamp + ", lastUpdateTimeStamp="
 				+ lastUpdateTimeStamp + "]";
 	}
@@ -171,12 +146,11 @@ public class User {
 		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
 		result = prime * result + ((lastUpdateTimeStamp == null) ? 0 : lastUpdateTimeStamp.hashCode());
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
 
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -205,11 +179,12 @@ public class User {
 				return false;
 		} else if (!lastname.equals(other.lastname))
 			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
 		return true;
+	}*/
+	
+	@Override
+	public boolean equals(Object o) {
+		User u = (User) o;
+		return this.firstname.equals(u.firstname) && this.lastname.equals(u.lastname) && this.creationTimeStamp.equals(u.creationTimeStamp);
 	}
 }

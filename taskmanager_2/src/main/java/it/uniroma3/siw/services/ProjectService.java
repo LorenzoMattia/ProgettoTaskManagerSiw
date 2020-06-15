@@ -31,7 +31,7 @@ public class ProjectService {
 	
 	@Transactional
 	public void deleteProject(Project p) {
-		this.projectRepository.save(p);
+		this.projectRepository.delete(p);
 	}
 	
 	//Usato in un test
