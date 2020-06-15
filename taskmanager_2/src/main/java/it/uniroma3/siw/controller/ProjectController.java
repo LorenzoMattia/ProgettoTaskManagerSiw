@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.controller.session.SessionData;
 import it.uniroma3.siw.model.Project;
+import it.uniroma3.siw.model.Task;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.ProjectRepository;
 import it.uniroma3.siw.services.ProjectService;
@@ -89,6 +91,40 @@ public class ProjectController {
 		}
 		model.addAttribute(loggedUser);
 		return "addProject";
-		
+	}
+	
+	@RequestMapping(value = { "/addTask/{projectId}" }, method = RequestMethod.GET)
+	public String addTaskForm(Model model, @PathVariable Long projectId) {
+		Project project = this.projectService.getProject(projectId);
+		model.addAttribute("project", project);
+		//model.addAttribute("user", sessionData.getLoggedUser());
+		model.addAttribute("task", new Task());
+		return "addTask";
+	}
+	
+	@RequestMapping(value = { "/projects/updateForm/{projectId}" }, method = RequestMethod.GET)
+	public String updatePorjectForm(Model model, @PathVariable Long projectId) {
+		Project project = this.projectService.getProject(projectId);
+		model.addAttribute("project", project);
+		return "updateProject";
+	}
+	
+	@RequestMapping(value = { "/projects/update/{projectId}" }, method = RequestMethod.POST)
+	public String updateProject(@Valid @ModelAttribute("project") Project project,
+								BindingResult projectBindingResult,
+								@PathVariable Long projectId,
+								Model model) {
+		User loggedUser = this.sessionData.getLoggedUser();
+		projectValidator.validate(project, projectBindingResult);
+		if(!projectBindingResult.hasErrors()) {
+			Project p = this.projectService.getProject(projectId);
+			p.setName(project.getName());
+			p.setDescription(project.getDescription());
+			p.setOwner(loggedUser);
+			this.projectService.saveProject(p);
+			return "redirect:/project/" + p.getId();
+		}
+		model.addAttribute(loggedUser);
+		return "updateProject";
 	}
 }

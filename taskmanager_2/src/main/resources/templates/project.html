@@ -23,4 +23,6 @@
 			<div th:text="${task.name}"></div>
 			<div th:text="${task.description}"></div>
 	</ul>
+	<p><a th:href="'/addTask/' + ${project.id}">Add new task</a></p>
+	<p><a th:href="'/projects/updateForm/' + ${project.id}">Update project</a>
 </body>
