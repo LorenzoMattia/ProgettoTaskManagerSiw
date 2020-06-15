@@ -40,10 +40,45 @@ public class TaskController {
 		Project p = this.projectService.getProject(projectId);
 		p.getTasks().add(task);
 		this.projectService.saveProject(p);
-		User loggedUser = sessionData.getLoggedUser();
-		List<Project> projectsList = projectService.retrieveProjectsOwnedBy(loggedUser);
-		model.addAttribute("user", loggedUser);
-		model.addAttribute("projectsList", projectsList);
-		return "myOwnedProjects";
+		return "redirect:/projects";
+	}
+	
+	@RequestMapping(value= { "/task/delete/{taskId}/{projectId}" }, method = RequestMethod.GET)
+	public String deleteTask(@PathVariable ("taskId") Long taskId,
+							 @PathVariable ("projectId") Long projectId, Model model) {
+		User loggedUser = this.sessionData.getLoggedUser();
+		User owner = this.projectService.getProject(projectId).getOwner();
+		if(loggedUser.equals(owner)) {
+			this.taskService.deleteById(taskId);
+			return "redirect:/project/" + projectId;
+		}
+		return "redirect:/home"; 
+	}
+	
+	@RequestMapping(value= { "/task/updateForm/{taskId}/{projectId}" }, method = RequestMethod.GET)
+	public String updateForm(@PathVariable ("taskId") Long taskId,
+							 @PathVariable ("projectId") Long projectId, Model model) {
+		model.addAttribute("task", this.taskService.getTask(taskId));
+		model.addAttribute("project", this.projectService.getProject(projectId));
+		
+		return "updateTask";
+	}
+	
+	@RequestMapping(value= { "/task/update/{taskId}/{projectId}" }, method = RequestMethod.POST)
+	public String update(@Valid @ModelAttribute("task") Task task,
+						 BindingResult taskBindingResult,
+						 @PathVariable ("taskId") Long taskId,
+						 @PathVariable ("projectId") Long projectId, 
+						 Model model) {
+		User loggedUser = this.sessionData.getLoggedUser();
+		User owner = this.projectService.getProject(projectId).getOwner();
+		if(loggedUser.equals(owner)) {
+			Task t = this.taskService.getTask(taskId);
+			t.setName(task.getName());
+			t.setDescription(task.getDescription());
+			this.taskService.saveTask(t);
+			return "redirect:/project/" + projectId;
+		}
+		return "redirect:/home"; 
 	}
 }

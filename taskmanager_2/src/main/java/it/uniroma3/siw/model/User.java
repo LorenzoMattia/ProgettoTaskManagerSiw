@@ -148,7 +148,7 @@ public class User {
 	}
 
 
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -178,5 +178,11 @@ public class User {
 		} else if (!lastname.equals(other.lastname))
 			return false;
 		return true;
+	}*/
+	
+	@Override
+	public boolean equals(Object o) {
+		User u = (User) o;
+		return this.firstname.equals(u.firstname) && this.lastname.equals(u.lastname) && this.creationTimeStamp.equals(u.creationTimeStamp);
 	}
 }

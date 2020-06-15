@@ -38,6 +38,12 @@ public class TaskService {
 		t.setCompleted(true);
 		return this.taskRepository.save(t);
 	}
+
+	@Transactional
+	public void deleteById(Long taskId) {
+		this.taskRepository.deleteById(taskId);
+		
+	}
 	
 	
 }

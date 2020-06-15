@@ -9,7 +9,7 @@
 <body>
 	<h1>Add Task</h1>
 	<form id= "addTaskForm"
-		  th:action = "@{'/task/add/' + ${project.id}}"
+		  th:action = "@{'/task/update/' + ${task.id} + '/' + ${project.id}}"
 		  method="POST">
 		<table>
 			<tr>
@@ -23,7 +23,7 @@
 				<td th:if="${#fields.hasErrors('task.description')}" th:error="${task.description}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
-				<td><button type="submit">Add Task</button>
+				<td><button type="submit">Update Task</button>
 			</tr>
 		</table>
 	</form>

@@ -22,6 +22,8 @@
 		<li th:each = "task: ${project.tasks}">
 			<div th:text="${task.name}"></div>
 			<div th:text="${task.description}"></div>
+			<a th:href="'/task/delete/' + ${task.id} + '/' + ${project.id}">Elimina</a>
+			<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Aggiorna</a>
 	</ul>
 	<p><a th:href="'/addTask/' + ${project.id}">Add new task</a></p>
 	<p><a th:href="'/projects/updateForm/' + ${project.id}">Update project</a>

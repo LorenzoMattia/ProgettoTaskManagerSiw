@@ -127,4 +127,12 @@ public class ProjectController {
 		model.addAttribute(loggedUser);
 		return "updateProject";
 	}
+	
+	@RequestMapping(value = { "/project/delete/{projectId}" }, method = RequestMethod.GET)
+	public String deleteProject(@PathVariable Long projectId,
+								Model model) {
+		this.projectService.deleteProject(this.projectService.getProject(projectId));
+		return "redirect:/projects";
+	}
+		
 }
