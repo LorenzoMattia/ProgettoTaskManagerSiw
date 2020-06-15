@@ -1,30 +1,33 @@
 <!DOCTYPE html>
-<html lang= "en"
-	  xmlns = "http://www.w3.org/1999/xhtml"
-	  xmlns:th = "https://www.thymeleaf.org">
-<head>
-	<title>TaskManager</title>
-</head>
+<html 	lang="en"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Add project -TaskManager</title>
+		
+	</head>
+	<body>
+		<h1>Add project</h1>
+		<form	id="addProjectForm"
+			 	th:action="@{/projects/add}"
+			 	th:object="${project}"
+				method="POST">
+			<table>
+				<tr>
+					<td><label for="name">Project name</label></td>
+					<td><input id="name" type="text" placeholder="NAME" required th:field="*{name}"></td>
+					<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'Color:red'"></td>
+				</tr>
+				<tr>
+					<td><label for="description">project description</label></td>
+					<td><input id="description" type="text" placeholder="DESCRIPTION" th:field="*{description}"/></td>
+					<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:style="'Color:red'"></td>
+				</tr>
+				<tr>
+					<td><button type="submit">Add project</button></td>
+				</tr>
+			</table>
+		</form>
+	</body>
 
-<body>
-	<form id= "addProjectForm"
-		  th:action = "@{/projects/add}"
-		  th:object = "${project}"
-		  method="POST">
-		<table>
-			<tr>
-				<td><label for= "projectNameInput">Project Name</label>
-				<td><input id= projectNameInput type = "text" placeholder="Name" required th:field="*{name}"/></td>
-				<td th:if="${#fields.hasErrors('name')}" th:error="*{name}" th:style="'color:red'"></td>
-			</tr>
-			<tr>
-				<td><label for= "projectDescriptionInput">Project Description</label>
-				<td><input id= projectDescriptionInput placeholder="Description" required th:field="*{description}"/></td>
-				<td th:if="${#fields.hasErrors('description')}" th:error="*{description}" th:style="'color:red'"></td>
-			</tr>
-			<tr>
-				<td><button type="submit">Register</button>
-			</tr>
-		</table>	  
-	</form>
-</body>
+</html>
