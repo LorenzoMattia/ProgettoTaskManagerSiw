@@ -14,7 +14,7 @@
 		<h3>Assigned to: </h3>
 		<ul>
 			<li th:each="member : ${members}">
-				<div th:text="${member.firstname} + ' ' + ${member.lastname}"></div>
+				<a th:href = "'/users/me/' + {member.id}" th:text = "${member.firstname} + ' ' + ${member.lastname}"></a>
 		</ul>
 	</div>
 </body>
