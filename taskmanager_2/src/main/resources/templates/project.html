@@ -10,7 +10,8 @@
 	<h1 th:text="${project.name}"></h1>
 	<h4 th:text="${project.description}" style= "color:gray"></h4>
 	
-	<a th:if="${my=='true'}" th:href="${project.id}+'/manageMembers'">Manage member</a>
+	<!-- <a th:if="${my=='true'}" th:href="${project.id}+'/manageMembers'">Manage member</a> -->
+	<a th:if="${my=='true'}" th:href="${project.id} + '/manageMembers'">Manage member</a>
 	<div th:if="${members.size() > 0}">
 		<h3>Shared with: </h3>
 		<ul>
@@ -27,7 +28,19 @@
 				<button type="submit" name="submit" value="value">DELETE</button>
 			</form>
 			<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Aggiorna</a>
+		</li>
 	</ul>
-	<p><a th:href="'/addTask/' + ${project.id}">Add new task</a></p>
+	<p><a th:href="'/task/add/' + ${project.id}">Add new task</a></p>
+	
+	<h3>Project's tags</h3>
+	<p><a th:href="${project.id} + '/tag/create'">Create a tag</a></p>
+	<div>
+		<ul>
+			<li th:each = "tag : ${project.tags}">
+				
+			</li>
+		</ul>
+	</div>
+	
 	<p><a th:href="'/projects/updateForm/' + ${project.id}">Update project</a>
 </body>

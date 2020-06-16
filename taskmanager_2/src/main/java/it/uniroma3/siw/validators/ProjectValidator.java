@@ -26,10 +26,10 @@ public class ProjectValidator implements Validator {
 		
 		if(name.isEmpty())
 			errors.rejectValue("name", "required");
-		else if(name.length()<this.MIN_NAME_LENGTH || name.length()>this.MAX_NAME_LENGTH)
+		else if(name.length() < this.MIN_NAME_LENGTH || name.length() > this.MAX_NAME_LENGTH)
 			errors.rejectValue("name", "size");
 		
-		if(description.length()>this.MAX_DESCRIPTION_LENGTH)
+		if(description.length() > this.MAX_DESCRIPTION_LENGTH)
 			errors.rejectValue("description", "size");
 		
 	}

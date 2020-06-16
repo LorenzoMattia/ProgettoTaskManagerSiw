@@ -24,7 +24,6 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
-	
 	@Column(nullable = false)
 	String firstname;
 	@Column(nullable = false)
@@ -38,10 +37,11 @@ public class User {
 	@ManyToMany(mappedBy = "members")
 	List<Project> visibleProjects; 
 	
-	public User(String username, String password, String firstname, String lastname) {
+	/*
+	public User(String firstname, String lastname) {
 		this.firstname = firstname;
 		this.lastname = lastname;
-	}
+	}*/
 	
 	public User() {
 		this.ownedProject = new ArrayList<Project>();
@@ -53,7 +53,7 @@ public class User {
 		return id;
 	}
 
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}

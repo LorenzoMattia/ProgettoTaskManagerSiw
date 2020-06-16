@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 @Entity
 public class Project {
@@ -42,8 +43,6 @@ public class Project {
 	@JoinColumn(name="project_id")
 	Set<Tag> tags;
 
-	
-	
 	public Project() {}
 	
 	public Project(String name, String description) {
@@ -53,7 +52,7 @@ public class Project {
 		this.tasks = new HashSet<Task>();
 		this.tags = new HashSet<Tag>();
 	}
-
+	
 
 	public Long getId() {
 		return id;
@@ -126,6 +125,11 @@ public class Project {
 
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
+	}
+	
+	
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
 	}
 
 

@@ -32,6 +32,15 @@ public class TaskController {
 	@Autowired
 	protected SessionData sessionData;
 	
+	@RequestMapping(value = { "/task/add/{projectId}" }, method = RequestMethod.GET)
+	public String addTaskForm(Model model, @PathVariable Long projectId) {
+		Project project = this.projectService.getProject(projectId);
+		model.addAttribute("project", project);
+		//model.addAttribute("user", sessionData.getLoggedUser());
+		model.addAttribute("task", new Task());
+		return "addTask";
+	}
+	
 	@RequestMapping(value= { "/task/add/{projectId}" }, method = RequestMethod.POST)
 	public String addTask(@Valid @ModelAttribute("task") Task task,
 						  BindingResult taskBindingResult,

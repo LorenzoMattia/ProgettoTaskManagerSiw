@@ -46,6 +46,7 @@ class Taskmanager2ApplicationTests {
 		System.out.println("Done");
 		}
 	
+	/*
 	@Test
 	void testUpdateUser() {
 		User user1 = new User("mariorossi", "password", "mario", "rossi");
@@ -91,5 +92,6 @@ class Taskmanager2ApplicationTests {
 		assertEquals(project1Members.get(0), user2);
 		
 	}
+	*/
 
 }
