@@ -48,6 +48,7 @@ public class ProjectController {
 		List<Project> projectsList = projectService.retrieveProjectsOwnedBy(loggedUser);
 		//model.addAttribute("user", loggedUser);
 		model.addAttribute("projectsList", projectsList);
+		model.addAttribute("my", "true");
 
 		return "projectsList";
 	}
@@ -68,6 +69,9 @@ public class ProjectController {
 		//model.addAttribute("user", loggedUser);
 		model.addAttribute("project", project);
 		model.addAttribute("members", members);
+		
+		if(loggedUser.equals(project.getOwner()))
+			model.addAttribute("my", "true");
 
 		return "project";
 	}
@@ -143,6 +147,7 @@ public class ProjectController {
 		List<Project> projectsList = projectService.retrieveProjectsSharedWith(loggedUser);
 		//model.addAttribute("user", loggedUser);
 		model.addAttribute("projectsList", projectsList);
+		model.addAttribute("my", "false");
 		
 		return "projectsList";
 	}
