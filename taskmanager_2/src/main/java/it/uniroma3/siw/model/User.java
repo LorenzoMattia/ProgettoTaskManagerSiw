@@ -190,4 +190,20 @@ public class User {
 		User u = (User) o;
 		return this.firstname.equals(u.firstname) && this.lastname.equals(u.lastname) && this.creationTimeStamp.equals(u.creationTimeStamp);
 	}
+
+	public List<Project> getVisibleProjects() {
+		return visibleProjects;
+	}
+
+	public void setVisibleProjects(List<Project> visibleProjects) {
+		this.visibleProjects = visibleProjects;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
 }

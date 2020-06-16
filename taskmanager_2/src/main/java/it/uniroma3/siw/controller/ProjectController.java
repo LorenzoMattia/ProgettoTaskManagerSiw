@@ -157,7 +157,6 @@ public class ProjectController {
 	public String addTaskForm(Model model, @PathVariable Long projectId) {
 		Project project = this.projectService.getProject(projectId);
 		model.addAttribute("project", project);
-		//model.addAttribute("user", sessionData.getLoggedUser());
 		model.addAttribute("task", new Task());
 		return "addTask";
 	}

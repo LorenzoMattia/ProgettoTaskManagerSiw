@@ -20,12 +20,16 @@ import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.services.ProjectService;
 import it.uniroma3.siw.services.TaskService;
 import it.uniroma3.siw.services.UserService;
+import it.uniroma3.siw.validators.TaskValidator;
 
 @Controller
 public class TaskController {
 	
 	@Autowired
 	protected TaskService taskService;
+	
+	@Autowired
+	protected TaskValidator taskValidator;
 	
 	@Autowired
 	protected ProjectService projectService;
@@ -36,15 +40,34 @@ public class TaskController {
 	@Autowired
 	protected SessionData sessionData;
 	
+	@RequestMapping(value = { "/task/viewTask/{taskId}/{projectId}" }, method = RequestMethod.GET)
+	public String viewTask(@PathVariable Long taskId,
+						   @PathVariable Long projectId,
+						   Model model) {
+		Task task = this.taskService.getTask(taskId);
+		Project project = this.projectService.getProject(projectId);
+		model.addAttribute("task", task);
+		model.addAttribute("project", project);
+		List<User> members = task.getMembers();
+		model.addAttribute("members", members);
+		return "task";
+	}
+	
 	@RequestMapping(value= { "/task/add/{projectId}" }, method = RequestMethod.POST)
 	public String addTask(@Valid @ModelAttribute("task") Task task,
 						  BindingResult taskBindingResult,
 						  @PathVariable("projectId") Long projectId,
 						  Model model) {
+		this.taskValidator.validate(task, taskBindingResult);
 		Project p = this.projectService.getProject(projectId);
-		p.getTasks().add(task);
-		this.projectService.saveProject(p);
-		return "redirect:/projects";
+		if(!taskBindingResult.hasErrors()) {
+			p.getTasks().add(task);
+			this.projectService.saveProject(p);
+			return "redirect:/projects";
+		}
+		//return "redirect:/addTask/" + projectId;
+		model.addAttribute("project", p);
+		return "addTask";
 	}
 	
 	@RequestMapping(value= { "/task/updateForm/{taskId}/{projectId}" }, method = RequestMethod.GET)
@@ -56,19 +79,6 @@ public class TaskController {
 		return "updateTask";
 	}
 	
-	@RequestMapping(value = { "/task/viewTask/{taskId}/{projectId}" }, method = RequestMethod.GET)
-		public String viewTask(@PathVariable Long taskId,
-							   @PathVariable Long projectId,
-							   Model model) {
-			Task task = this.taskService.getTask(taskId);
-			Project project = this.projectService.getProject(projectId);
-			model.addAttribute("task", task);
-			model.addAttribute("project", project);
-			List<User> members = task.getMembers();
-			model.addAttribute("members", members);
-			return "task";
-		}
-	
 	@RequestMapping(value= { "/task/update/{taskId}/{projectId}" }, method = RequestMethod.POST)
 	public String update(@Valid @ModelAttribute("task") Task task,
 						 BindingResult taskBindingResult,
@@ -77,14 +87,21 @@ public class TaskController {
 						 Model model) {
 		User loggedUser = this.sessionData.getLoggedUser();
 		User owner = this.projectService.getProject(projectId).getOwner();
-		if(loggedUser.equals(owner)) {
-			Task t = this.taskService.getTask(taskId);
-			t.setName(task.getName());
-			t.setDescription(task.getDescription());
-			this.taskService.saveTask(t);
-			return "redirect:/project/" + projectId;
+		this.taskValidator.validate(task, taskBindingResult);
+		Task t = this.taskService.getTask(taskId);
+		Project p = this.projectService.getProject(projectId);
+		if(!taskBindingResult.hasErrors()) {
+			if(loggedUser.equals(owner)) {
+				t.setName(task.getName());
+				t.setDescription(task.getDescription());
+				this.taskService.saveTask(t);
+				return "redirect:/project/" + projectId;
+			}
 		}
-		return "redirect:/home"; 
+		//return "/task/updateForm/" + taskId + "/" + projectId; 
+		model.addAttribute("task", t);
+		model.addAttribute("project", p);
+		return "updateTask";
 	}
 	
 	@RequestMapping(value = { "/task/assignUserToTask/{taskId}/{projectId}" }, method = RequestMethod.GET)
@@ -114,6 +131,8 @@ public class TaskController {
 		if(!task.getMembers().contains(user)) {
 			task.getMembers().add(user);
 			this.taskService.saveTask(task);
+			user.getTasks().add(task);
+			this.userService.saveUser(user);
 			return "redirect:/task/viewTask/" + taskId + "/" + projectId;
 		}
 		return "redirect:/task/viewTask/" + taskId + "/" + projectId;
