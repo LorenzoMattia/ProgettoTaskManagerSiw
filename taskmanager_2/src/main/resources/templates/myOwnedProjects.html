@@ -20,7 +20,10 @@
 				<tr th:each = "project : ${projectsList}">
 					<td><a th:href="'/project/' + ${project.id}" th:text = "${project.name}"></a></td>
 					<td th:text = "${project.description}"></td>
-					<td><a th:href="'/project/delete/' + ${project.id}">Elimina</a></td> 
+					<td><form method="POST" th:action="@{'/project/delete/' + ${project.id}}">
+						<button type="submit" name="submit" value="value">DELETE</button>
+					</form>
+					</td>
 			</tbody>
 		</table>
 	</div>

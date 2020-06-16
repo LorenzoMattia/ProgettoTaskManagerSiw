@@ -22,7 +22,9 @@
 		<li th:each = "task: ${project.tasks}">
 			<div th:text="${task.name}"></div>
 			<div th:text="${task.description}"></div>
-			<a th:href="'/task/delete/' + ${task.id} + '/' + ${project.id}">Elimina</a>
+			<form method="POST" th:action="@{'/project/tasks/delete/' + ${task.id} + '/' + ${project.id}}">
+				<button type="submit" name="submit" value="value">DELETE</button>
+			</form>
 			<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Aggiorna</a>
 	</ul>
 	<p><a th:href="'/addTask/' + ${project.id}">Add new task</a></p>
