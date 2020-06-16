@@ -28,8 +28,12 @@ public class Task {
 	@ManyToMany
 	List<Tag> tags;
 	
+	@ManyToMany
+	List<User> members;
+	
 	public Task() {
 		this.tags = new ArrayList<Tag>();
+		this.members = new ArrayList<User>();
 	}
 	
 	public Long getId() {
@@ -117,5 +121,21 @@ public class Task {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+	public List<User> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<User> members) {
+		this.members = members;
 	}
 }

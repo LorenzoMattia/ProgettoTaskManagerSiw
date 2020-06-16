@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang= "en"
+	  xmlns = "http://www.w3.org/1999/xhtml"
+	  xmlns:th = "https://www.thymeleaf.org">
+<head>
+	<title>TaskManager</title>
+</head>
+
+<body>
+	<h1 th:text ="'Scegli a chi assegnare ' + ${task.name}"></h1>
+	
+	<div th:if = "${members.size() > 0}">
+		<h2>Utenti disponibili: </h2>
+		<ul>
+			<li th:each =" member : ${members}">
+				<div>
+					<a th:href = "'/task/userChosen/' + ${task.id} + '/' + ${project.id} + '/' + ${member.id}" 
+					   th:text = "${member.firstname} + ${member.lastname}"></a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</body>

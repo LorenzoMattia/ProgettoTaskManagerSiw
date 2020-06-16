@@ -28,6 +28,7 @@
 				<button type="submit" name="submit" value="value">DELETE</button>
 			</form>
 			<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Aggiorna</a>
+			<a th:href="'/task/viewTask/' + ${task.id} + '/' + ${project.id}">Visualizza</a>
 		</li>
 	</ul>
 	<p><a th:href="'/task/add/' + ${project.id}">Add new task</a></p>

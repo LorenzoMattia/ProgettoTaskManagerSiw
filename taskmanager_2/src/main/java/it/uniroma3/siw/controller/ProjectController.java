@@ -152,6 +152,14 @@ public class ProjectController {
 		return "projectsList";
 	}
 
+	@RequestMapping(value = { "/addTask/{projectId}" }, method = RequestMethod.GET)
+	public String addTaskForm(Model model, @PathVariable Long projectId) {
+		Project project = this.projectService.getProject(projectId);
+		model.addAttribute("project", project);
+		model.addAttribute("task", new Task());
+		return "addTask";
+	}
+
 	@RequestMapping(value = { "/projects/updateForm/{projectId}" }, method = RequestMethod.GET)
 	public String updateProjectForm(Model model, @PathVariable Long projectId) { // ERRORE DI BATTITURA
 		Project project = this.projectService.getProject(projectId);

@@ -37,12 +37,6 @@ public class User {
 	@ManyToMany(mappedBy = "members")
 	List<Project> visibleProjects; 
 	
-	/*
-	public User(String firstname, String lastname) {
-		this.firstname = firstname;
-		this.lastname = lastname;
-	}*/
-	
 	public User() {
 		this.ownedProject = new ArrayList<Project>();
 		this.visibleProjects = new ArrayList<Project>();
@@ -186,5 +180,21 @@ public class User {
 	public boolean equals(Object o) {
 		User u = (User) o;
 		return this.firstname.equals(u.firstname) && this.lastname.equals(u.lastname) && this.creationTimeStamp.equals(u.creationTimeStamp);
+	}
+
+	public List<Project> getVisibleProjects() {
+		return visibleProjects;
+	}
+
+	public void setVisibleProjects(List<Project> visibleProjects) {
+		this.visibleProjects = visibleProjects;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 }

@@ -14,7 +14,8 @@
 		<h3>Assigned to: </h3>
 		<ul>
 			<li th:each="member : ${members}">
-				<a th:href = "'/users/me/' + {member.id}" th:text = "${member.firstname} + ' ' + ${member.lastname}"></a>
+				<a th:href = "'/users/me/' + ${member.id}" th:text = "${member.firstname} + ' ' + ${member.lastname}"></a>
 		</ul>
 	</div>
+	<a th:href = "'/task/assignUserToTask/' + ${task.id} + '/' + ${project.id}">Add member</a>
 </body>
