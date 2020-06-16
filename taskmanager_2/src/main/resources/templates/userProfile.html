@@ -9,14 +9,14 @@
 <body>
 	<h1>Your Profile</h1>
 		<table>
-		  	<tr><td>Username</td><td th:text = "${credentials.username}"></td></tr>
-		  	<tr><td>Role</td><td th:text = "${credentials.role}"></td></tr>
+		  	<tr th:if = "${mine == 'true'}"><td>Username</td><td th:text = "${credentials.username}"></td></tr>
+		  	<tr th:if = "${mine == 'true'}"><td>Role</td><td th:text = "${credentials.role}"></td></tr>
 		  	<tr><td>First Name</td><td th:text = "${user.firstname}"></td></tr>
 		  	<tr><td>Last Name</td><td th:text = "${user.lastname}"></td></tr>
 		  	<tr><td>Registered at: </td><td th:text = "${user.creationTimeStamp}"></td></tr>
 		  	<tr><td>Last Update at: </td><td th:text = "${user.lastUpdateTimeStamp}"></td></tr>
 		</table>
-		<p><a href="/users/updateForm">Update Profile</a></p>
+		<p th:if = "${mine == 'true'}"><a href="/users/updateForm">Update Profile</a></p>
 </body>
 
 </html>

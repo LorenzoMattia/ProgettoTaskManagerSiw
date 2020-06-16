@@ -17,6 +17,7 @@ import it.uniroma3.siw.controller.session.SessionData;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.services.CredentialsService;
+import it.uniroma3.siw.services.UserService;
 import it.uniroma3.siw.validators.CredentialsValidator;
 import it.uniroma3.siw.validators.UserValidator;
 
@@ -28,6 +29,9 @@ public class UserController {
 	
 	@Autowired
 	CredentialsService credentialsService;
+	
+	@Autowired
+	UserService userService;
 	
 	@Autowired
 	UserValidator userValidator;
@@ -44,10 +48,21 @@ public class UserController {
 	
 	@RequestMapping(value = { "/users/me"}, method = RequestMethod.GET)
 	public String me(Model model) {
+		String mine = "true";
 		User loggedUser = this.sessionData.getLoggedUser();
 		Credentials credentials = this.sessionData.getLoggedCredentials();
 		model.addAttribute("user", loggedUser);
 		model.addAttribute("credentials", credentials);
+		model.addAttribute("mine", mine);
+		return "userProfile";
+	}
+	
+	@RequestMapping(value = { "/users/me/{userId}" }, method = RequestMethod.GET)
+	public String UserProfile(Model model, @PathVariable Long userId) {
+		User u = this.userService.getUser(userId);
+		String mine = "false";
+		model.addAttribute("mine", mine);
+		model.addAttribute("user", u);
 		return "userProfile";
 	}
 	

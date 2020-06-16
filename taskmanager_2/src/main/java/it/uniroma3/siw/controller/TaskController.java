@@ -43,7 +43,7 @@ public class TaskController {
 		return "redirect:/projects";
 	}
 	
-	@RequestMapping(value= { "/task/delete/{taskId}/{projectId}" }, method = RequestMethod.GET)
+	/*@RequestMapping(value= { "/task/delete/{taskId}/{projectId}" }, method = RequestMethod.GET)
 	public String deleteTask(@PathVariable ("taskId") Long taskId,
 							 @PathVariable ("projectId") Long projectId, Model model) {
 		User loggedUser = this.sessionData.getLoggedUser();
@@ -53,7 +53,7 @@ public class TaskController {
 			return "redirect:/project/" + projectId;
 		}
 		return "redirect:/home"; 
-	}
+	}*/
 	
 	@RequestMapping(value= { "/task/updateForm/{taskId}/{projectId}" }, method = RequestMethod.GET)
 	public String updateForm(@PathVariable ("taskId") Long taskId,

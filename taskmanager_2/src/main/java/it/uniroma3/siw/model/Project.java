@@ -1,8 +1,9 @@
 package it.uniroma3.siw.model;
 
 import java.util.ArrayList;
-
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,7 +36,13 @@ public class Project {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="project_id")
-	List<Task> tasks;
+	Set<Task> tasks;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="project_id")
+	Set<Tag> tags;
+
+	
 	
 	public Project() {}
 	
@@ -43,7 +50,8 @@ public class Project {
 		this.name = name;
 		this.description = description;
 		this.members = new ArrayList<User>();
-		this.tasks = new ArrayList<Task>();
+		this.tasks = new HashSet<Task>();
+		this.tags = new HashSet<Tag>();
 	}
 
 
@@ -111,12 +119,12 @@ public class Project {
 	}
 
 
-	public List<Task> getTasks() {
+	public Set<Task> getTasks() {
 		return tasks;
 	}
 
 
-	public void setTasks(List<Task> tasks) {
+	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
 
