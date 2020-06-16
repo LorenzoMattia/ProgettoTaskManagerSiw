@@ -38,6 +38,9 @@ public class User {
 	@ManyToMany(mappedBy = "members")
 	List<Project> visibleProjects; 
 	
+	@ManyToMany(mappedBy = "members")
+	List<Task> tasks;
+	
 	public User(String username, String password, String firstname, String lastname) {
 		this.firstname = firstname;
 		this.lastname = lastname;
