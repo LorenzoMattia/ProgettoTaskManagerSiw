@@ -101,17 +101,17 @@ public class ProjectController {
 	@RequestMapping(value = { "/project/{projectId}/manageMembers" }, method=RequestMethod.GET)
 	public String manageMembersForm(Model model, @PathVariable Long projectId) {
 		
-		Project project = projectService.getProject(projectId);
+		Project project = this.projectService.getProject(projectId);
 		model.addAttribute("project", project);
 		
-		List<User> notMembers = userService.getNotMembers(project);
+		List<User> notMembers = this.userService.getNotMembers(project);
 		notMembers.remove(project.getOwner());
 		model.addAttribute("notMembers", notMembers);
 		
-		List<User> members = userService.getMembers(project);
+		List<User> members = this.userService.getMembers(project);
 		model.addAttribute("members", members);
 		
-		model.addAttribute("loggedUser", this.sessionData.getLoggedCredentials());
+		//model.addAttribute("loggedUser", this.sessionData.getLoggedCredentials());
 		return "manageMembers";
 	}
 	

@@ -10,13 +10,28 @@
 	<h1 th:text="${task.name}"></h1>
 	<h4 th:text="${task.description}" style= "color:gray"></h4>
 	
-	<h2>Members</h2>
+	<!-- <h2>Members</h2> -->
+	<a th:href = "'/task/assignUserToTask/' + ${task.id} + '/' + ${project.id}">Add member</a>
 	<div th:if="${members.size() > 0}">
 		<h3>Assigned to: </h3>
 		<ul>
 			<li th:each="member : ${members}">
 				<a th:href = "'/users/me/' + ${member.id}" th:text = "${member.firstname} + ' ' + ${member.lastname}"></a>
+			</li>
 		</ul>
 	</div>
-	<a th:href = "'/task/assignUserToTask/' + ${task.id} + '/' + ${project.id}">Add member</a>
+	
+	<!-- <h2>Tags</h2> -->
+	<a th:href = "'/task/' + ${task.id} + '/manageTag'">Add tag</a>
+	<div th:if="${task.tags.size() > 0}">
+		<h3>Tags</h3>
+		<ul>
+			<li th:each = "tag: ${task.tags}" style="border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px;">
+				<h3 th:text="${tag.name}" style="margin:5px;"></h3>
+				<i th:text="${tag.color}" style="margin:10px;"></i>
+				<div th:text="${tag.description}" style="margin:5px;"></div>
+				<br/>
+			</li> 
+		</ul>
+	</div>
 </body>

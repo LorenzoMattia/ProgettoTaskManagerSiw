@@ -1,5 +1,6 @@
 package it.uniroma3.siw.services;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.siw.model.Tag;
 import it.uniroma3.siw.model.Task;
 import it.uniroma3.siw.repository.TaskRepository;
 
@@ -43,7 +45,6 @@ public class TaskService {
 	public void deleteById(Long taskId) {
 		this.taskRepository.deleteById(taskId);
 		
-	}
-	
+	}	
 	
 }

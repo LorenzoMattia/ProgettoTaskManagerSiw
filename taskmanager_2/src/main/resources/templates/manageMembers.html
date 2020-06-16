@@ -7,17 +7,27 @@
 	</head>
 
 	<body>
-		<div style="display:hover; ">
-			<h1>All members</h1>
-			<ul th:each="member : ${members}">
-				<li><a th:href="'/project/' + ${project.id} + '/removeMember/' + ${member.id}" th:text="${member.firstname} + ' ' + ${member.lastname}"></a></li>
-			</ul>
-		</div>
-		<div style="display:hover; ">
-			<h1>All <b>NOT</b> members</h1>
-			<ul th:each="notMember : ${notMembers}">
-				<li><a th:href="'/project/' + ${project.id} + '/addMember/' + ${notMember.id}" th:text="${notMember.firstname} + ' ' + ${notMember.lastname}"></a></li>
-			</ul>
-		</div>
+		<table>
+			<tr>
+				<td><h1 style="margin-right:100px;">All members</h1></td><td><h1>All NOT members</h1></td>
+			</tr>
+			<tr>
+				<td>
+					<div>
+						<ul th:each="member : ${members}">
+							<li><a th:href="'/project/' + ${project.id} + '/removeMember/' + ${member.id}" th:text="${member.firstname} + ' ' + ${member.lastname}"></a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div>
+						
+						<ul th:each="notMember : ${notMembers}">
+							<li><a th:href="'/project/' + ${project.id} + '/addMember/' + ${notMember.id}" th:text="${notMember.firstname} + ' ' + ${notMember.lastname}"></a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</body>
 </html>

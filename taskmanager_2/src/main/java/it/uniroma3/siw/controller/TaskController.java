@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.controller.session.SessionData;
 import it.uniroma3.siw.model.Project;
+import it.uniroma3.siw.model.Tag;
 import it.uniroma3.siw.model.Task;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.services.ProjectService;
+import it.uniroma3.siw.services.TagService;
 import it.uniroma3.siw.services.TaskService;
 import it.uniroma3.siw.services.UserService;
 import it.uniroma3.siw.validators.TaskValidator;
@@ -39,6 +41,9 @@ public class TaskController {
 	
 	@Autowired
 	protected SessionData sessionData;
+
+	@Autowired
+	TagService tagService;
 	
 	@RequestMapping(value = { "/task/add/{projectId}" }, method = RequestMethod.GET)
 	public String addTaskForm(Model model, @PathVariable Long projectId) {
@@ -145,6 +150,23 @@ public class TaskController {
 			return "redirect:/task/viewTask/" + taskId + "/" + projectId;
 		}
 		return "redirect:/task/viewTask/" + taskId + "/" + projectId;
+	}
+	
+	@RequestMapping(value = { "/task/{taskId}/manageTag" }, method = RequestMethod.GET)
+	public String manageTag(Model model, @PathVariable Long taskId) {
+		
+		Task task = taskService.getTask(taskId);
+		model.addAttribute("task", task);
+		
+		List<Tag> tagsNotAdded = this.tagService.getTagNotAdded(task);
+		model.addAttribute("notMembers", tagsNotAdded);
+		
+		List<Tag> tagsAdded = this.tagService.getTagAdded(task);
+		model.addAttribute("tagsAdded", tagsAdded);
+		
+		//model.addAttribute("loggedUser", this.sessionData.getLoggedCredentials());
+		
+		return "manageTags";
 	}
 
 }
