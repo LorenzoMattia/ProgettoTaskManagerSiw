@@ -146,4 +146,8 @@ public class Project {
 			return false;
 		return true;
 	}
+
+	public void removeTaskWithId(Long taskId) {
+		tasks.removeIf(task -> task.getId().equals(taskId));
+	}
 }

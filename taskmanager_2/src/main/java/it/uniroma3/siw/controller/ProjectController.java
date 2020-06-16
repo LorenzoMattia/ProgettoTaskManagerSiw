@@ -183,11 +183,25 @@ public class ProjectController {
 		return "updateProject";
 	}
 	
-	@RequestMapping(value = { "/project/delete/{projectId}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/project/delete/{projectId}" }, method = RequestMethod.POST)
 	public String deleteProject(@PathVariable Long projectId,
 								Model model) {
 		this.projectService.deleteProject(this.projectService.getProject(projectId));
 		return "redirect:/projects";
+	}
+	
+	@RequestMapping(value = { "/project/tasks/delete/{taskId}/{projectId}" }, method = RequestMethod.POST)
+	public String deleteTaskFromProject(@PathVariable ("taskId") Long taskId,
+							 			@PathVariable ("projectId") Long projectId, Model model) {
+		User loggedUser = this.sessionData.getLoggedUser();
+		Project project = this.projectService.getProject(projectId);
+		User owner = project.getOwner();
+		if(loggedUser.equals(owner)) {
+			project.removeTaskWithId(taskId);
+			this.projectService.saveProject(project);
+			return "redirect:/project/" + projectId;
+		}
+		return "redirect:/project/" + projectId;
 	}
 		
 }
