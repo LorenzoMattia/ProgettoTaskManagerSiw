@@ -1,0 +1,18 @@
+body {
+ background-color: #d1f8dc;
+ color: #ffffff;
+ align-content: center;
+ margin: auto;
+ width: 30%;
+
+}
+
+h1 {
+	color:Black;
+	font-size: 30pt;
+}
+
+h4 {
+	font-size: 16pt;
+	margin : 20px;
+}
