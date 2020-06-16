@@ -47,6 +47,7 @@ public class TaskController {
 		//model.addAttribute("user", sessionData.getLoggedUser());
 		model.addAttribute("task", new Task());
 		return "addTask";
+	}
 		
 	@RequestMapping(value = { "/task/viewTask/{taskId}/{projectId}" }, method = RequestMethod.GET)
 	public String viewTask(@PathVariable Long taskId,

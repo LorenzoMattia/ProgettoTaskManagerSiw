@@ -52,7 +52,7 @@ public class TagController {
 			project.addTag(tag);
 			this.projectService.saveProject(project);
 			
-			return "redirect:/project/{projectId}/tag/create"; //DA RIVEDERE
+			return "redirect:/project/{projectId}"; //DA RIVEDERE
 		}
 		
 		return "createTag";

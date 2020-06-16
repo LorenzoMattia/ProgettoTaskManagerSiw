@@ -43,7 +43,11 @@ public class Project {
 	@JoinColumn(name="project_id")
 	Set<Tag> tags;
 
-	public Project() {}
+	public Project() {
+		this.members = new ArrayList<User>();
+		this.tasks = new HashSet<Task>();
+		this.tags = new HashSet<Tag>();
+	}
 	
 	public Project(String name, String description) {
 		this.name = name;
@@ -128,6 +132,14 @@ public class Project {
 	}
 	
 	
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
+
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
 	}

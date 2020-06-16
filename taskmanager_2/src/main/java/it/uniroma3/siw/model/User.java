@@ -37,6 +37,9 @@ public class User {
 	@ManyToMany(mappedBy = "members")
 	List<Project> visibleProjects; 
 	
+	@ManyToMany(mappedBy = "members")
+	List<Task> tasks;
+	
 	public User() {
 		this.ownedProject = new ArrayList<Project>();
 		this.visibleProjects = new ArrayList<Project>();
