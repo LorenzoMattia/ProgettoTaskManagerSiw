@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -26,6 +27,10 @@ public class Task {
 	
 	@ManyToMany
 	List<Tag> tags;
+	
+	public Task() {
+		this.tags = new ArrayList<Tag>();
+	}
 	
 	public Long getId() {
 		return id;
