@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang= "en"
+	  xmlns = "http://www.w3.org/1999/xhtml"
+	  xmlns:th = "https://www.thymeleaf.org">
+	<head>
+		<title>TaskManager</title>
+	</head>
+
+	<body>
+		<div style="display:hover; ">
+			<h1>All members</h1>
+			<ul th:each="member : ${members}">
+				<li><a th:href="'/project/' + ${project.id} + '/removeMember/' + ${member.id}" th:text="${member.firstname} + ' ' + ${member.lastname}"></a></li>
+			</ul>
+		</div>
+		<div style="display:hover; ">
+			<h1>All <b>NOT</b> members</h1>
+			<ul th:each="notMember : ${notMembers}">
+				<li><a th:href="'/project/' + ${project.id} + '/addMember/' + ${notMember.id}" th:text="${notMember.firstname} + ' ' + ${notMember.lastname}"></a></li>
+			</ul>
+		</div>
+	</body>
+</html>

@@ -14,6 +14,7 @@ import it.uniroma3.siw.repository.ProjectRepository;
 
 @Service
 public class ProjectService {
+	
 	@Autowired
 	private ProjectRepository projectRepository;
 	
@@ -33,6 +34,7 @@ public class ProjectService {
 		this.projectRepository.delete(p);
 	}
 	
+	//Usato in un test
 	@Transactional
 	public Project shareProjectWithUser(Project p, User member) {
 		p.addMember(member);
@@ -43,6 +45,11 @@ public class ProjectService {
 	public List<Project> retrieveProjectsOwnedBy(User loggedUser) {
 		List<Project> projectsList = (this.projectRepository.findByOwner(loggedUser)); //da rivedere!!!!
 		return projectsList;
-		
+	}
+	
+	@Transactional
+	public List<Project> retrieveProjectsSharedWith(User loggedUser) {
+		List<Project> projectList = (this.projectRepository.findByMembers(loggedUser));
+		return projectList;
 	}
 }

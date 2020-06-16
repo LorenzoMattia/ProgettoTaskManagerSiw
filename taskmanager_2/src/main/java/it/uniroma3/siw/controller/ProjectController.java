@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,8 +33,8 @@ public class ProjectController {
 	@Autowired
 	protected UserService userService;
 
-	@Autowired
-	protected ProjectRepository projectRepository;
+	//@Autowired
+	//protected ProjectRepository projectRepository;
 
 	@Autowired
 	protected ProjectValidator projectValidator;
@@ -45,10 +46,10 @@ public class ProjectController {
 	public String myOwnedProjects(Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Project> projectsList = projectService.retrieveProjectsOwnedBy(loggedUser);
-		model.addAttribute("user", loggedUser);
+		//model.addAttribute("user", loggedUser);
 		model.addAttribute("projectsList", projectsList);
 
-		return "myOwnedProjects";
+		return "projectsList";
 	}
 
 	@RequestMapping(value = { "/project/{projectId}" }, method = RequestMethod.GET)
@@ -92,6 +93,58 @@ public class ProjectController {
 		//model.addAttribute(loggedUser);
 		return "addProject";
 	}
+	
+	@RequestMapping(value = { "/project/{projectId}/manageMembers" }, method=RequestMethod.GET)
+	public String manageMembersForm(Model model, @PathVariable Long projectId) {
+		
+		Project project = projectService.getProject(projectId);
+		model.addAttribute("project", project);
+		
+		List<User> notMembers = userService.getNotMembers(project);
+		notMembers.remove(project.getOwner());
+		model.addAttribute("notMembers", notMembers);
+		
+		List<User> members = userService.getMembers(project);
+		model.addAttribute("members", members);
+		
+		model.addAttribute("loggedUser", this.sessionData.getLoggedCredentials());
+		return "manageMembers";
+	}
+	
+	@RequestMapping(value = { "/project/{projectId}/addMember/{memberId}" }, method=RequestMethod.GET)
+	public String addMember(Model model, @PathVariable Long projectId, @PathVariable Long memberId) {
+		Credential loggedUser = (Credential) model.getAttribute("loggedUser");
+		System.out.println(loggedUser);
+		if(this.sessionData.getLoggedCredentials().equals(loggedUser)) {
+			Project project = projectService.getProject(projectId);
+			projectService.shareProjectWithUser(project, userService.getUser(memberId));
+		}
+		
+		
+		return "redirect:/project/{projectId}/manageMembers";
+	}
+	
+	@RequestMapping(value = { "/project/{projectId}/removeMember/{memberId}" }, method=RequestMethod.GET)
+	public String removeMember(Model model, @PathVariable Long projectId, @PathVariable Long memberId) {
+		
+		Project project = projectService.getProject(projectId);
+		project.removeMember(userService.getUser(memberId));
+		projectService.saveProject(project);
+		
+		return "redirect:/project/{projectId}/manageMembers";
+	}
+	
+	@RequestMapping(value = { "/projects/shared" }, method = RequestMethod.GET)
+	public String sharedProjects(Model model) {
+		User loggedUser = sessionData.getLoggedUser();
+		
+		List<Project> projectsList = projectService.retrieveProjectsSharedWith(loggedUser);
+		//model.addAttribute("user", loggedUser);
+		model.addAttribute("projectsList", projectsList);
+		
+		return "projectsList";
+	}
+	
 
 	@RequestMapping(value = { "/addTask/{projectId}" }, method = RequestMethod.GET)
 	public String addTaskForm(Model model, @PathVariable Long projectId) {
@@ -103,7 +156,7 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value = { "/projects/updateForm/{projectId}" }, method = RequestMethod.GET)
-	public String updatePorjectForm(Model model, @PathVariable Long projectId) {
+	public String updatePorjectForm(Model model, @PathVariable Long projectId) { // ERRORE DI BATTITURA
 		Project project = this.projectService.getProject(projectId);
 		model.addAttribute("project", project);
 		return "updateProject";

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -83,6 +84,10 @@ public class Project {
 	
 	public void addMember(User member) {
 		this.members.add(member);
+	}
+	
+	public void removeMember(User member) {
+		this.members.remove(member);
 	}
 
 
