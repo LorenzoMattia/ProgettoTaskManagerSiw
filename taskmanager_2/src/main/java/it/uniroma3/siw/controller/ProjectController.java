@@ -65,7 +65,7 @@ public class ProjectController {
 			return "redirect:/projects";
 		}
 
-		model.addAttribute("user", loggedUser);
+		//model.addAttribute("user", loggedUser);
 		model.addAttribute("project", project);
 		model.addAttribute("members", members);
 
@@ -113,13 +113,12 @@ public class ProjectController {
 	
 	@RequestMapping(value = { "/project/{projectId}/addMember/{memberId}" }, method=RequestMethod.GET)
 	public String addMember(Model model, @PathVariable Long projectId, @PathVariable Long memberId) {
-		Credential loggedUser = (Credential) model.getAttribute("loggedUser");
-		System.out.println(loggedUser);
-		if(this.sessionData.getLoggedCredentials().equals(loggedUser)) {
-			Project project = projectService.getProject(projectId);
+		
+		Project project = projectService.getProject(projectId);
+		
+		if(this.sessionData.getLoggedUser().equals(project.getOwner())) {
 			projectService.shareProjectWithUser(project, userService.getUser(memberId));
 		}
-		
 		
 		return "redirect:/project/{projectId}/manageMembers";
 	}
@@ -128,9 +127,12 @@ public class ProjectController {
 	public String removeMember(Model model, @PathVariable Long projectId, @PathVariable Long memberId) {
 		
 		Project project = projectService.getProject(projectId);
-		project.removeMember(userService.getUser(memberId));
-		projectService.saveProject(project);
 		
+		if(this.sessionData.getLoggedUser().equals(project.getOwner())) {
+			project.removeMember(userService.getUser(memberId));
+			projectService.saveProject(project);
+		}
+
 		return "redirect:/project/{projectId}/manageMembers";
 	}
 	
