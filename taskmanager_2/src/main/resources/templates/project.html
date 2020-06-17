@@ -30,6 +30,7 @@
 			</form>
 			<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Aggiorna</a>
 			<div><a th:href="'/task/viewTask/' + ${task.id} + '/' + ${project.id}">Visualizza</a></div>
+			<div><a th:href="'/task/commentForm/' + ${task.id} + '/' + ${project.id}">Commenta</a></div>
 		</li>
 	</ul>
 	<p><a th:href="'/task/add/' + ${project.id}">Add new task</a></p>
