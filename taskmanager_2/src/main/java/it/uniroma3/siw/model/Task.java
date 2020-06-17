@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -36,9 +37,13 @@ public class Task {
 	@ManyToMany
 	List<User> members;
 	
+	@OneToMany(mappedBy = "task")
+	List<Comment> comments;
+	
 	public Task() {
 		this.tags = new ArrayList<Tag>();
 		this.members = new ArrayList<User>();
+		this.comments = new ArrayList<Comment>();
 	}
 	
 	public Long getId() {
@@ -159,5 +164,16 @@ public class Task {
 	public void setProject(Project project) {
 		this.project = project;
 	}
-	
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
 }

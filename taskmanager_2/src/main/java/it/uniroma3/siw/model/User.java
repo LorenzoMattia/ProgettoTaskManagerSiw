@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,9 +41,13 @@ public class User {
 	@ManyToMany(mappedBy = "members")
 	List<Task> tasks;
 	
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	List<Comment> comments;
+	
 	public User() {
 		this.ownedProject = new ArrayList<Project>();
 		this.visibleProjects = new ArrayList<Project>();
+		this.comments = new ArrayList<Comment>();
 	}
 
 
@@ -199,5 +204,15 @@ public class User {
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 }

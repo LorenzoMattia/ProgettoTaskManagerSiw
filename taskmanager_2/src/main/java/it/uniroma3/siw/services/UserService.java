@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.siw.model.Comment;
 import it.uniroma3.siw.model.Project;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.UserRepository;
@@ -45,5 +46,10 @@ public class UserService {
 	
 	public List<User> getNotMembers(Project project) {
 		return this.userRepository.findByNotVisibleProjects(project.getId());
+	}
+
+	public void addComment(Comment comment, User owner) {
+		owner.getComments().add(comment);
+		this.userRepository.save(owner);
 	}
 }

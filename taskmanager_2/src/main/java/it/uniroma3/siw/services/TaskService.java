@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.siw.model.Comment;
 import it.uniroma3.siw.model.Tag;
 import it.uniroma3.siw.model.Task;
 import it.uniroma3.siw.repository.TaskRepository;
@@ -43,7 +44,12 @@ public class TaskService {
 
 	@Transactional
 	public void deleteById(Long taskId) {
-		this.taskRepository.deleteById(taskId);
+		this.taskRepository.deleteById(taskId);		
+	}	
+	
+	@Transactional
+	public void addComment(Comment c, Task t) {
+		t.getComments().add(c);
+		this.taskRepository.save(t);
 	}
-
 }
