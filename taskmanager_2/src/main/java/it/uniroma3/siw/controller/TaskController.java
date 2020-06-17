@@ -76,6 +76,7 @@ public class TaskController {
 		Project p = this.projectService.getProject(projectId);
 		if(!taskBindingResult.hasErrors()) {
 			p.getTasks().add(task);
+			task.setProject(p);
 			this.projectService.saveProject(p);
 			return "redirect:/projects";
 		}
@@ -152,21 +153,53 @@ public class TaskController {
 		return "redirect:/task/viewTask/" + taskId + "/" + projectId;
 	}
 	
-	@RequestMapping(value = { "/task/{taskId}/manageTag" }, method = RequestMethod.GET)
-	public String manageTag(Model model, @PathVariable Long taskId) {
+	@RequestMapping(value = { "/project/{projectId}/task/{taskId}/manageTag" }, method = RequestMethod.GET)
+	public String manageTag(Model model, @PathVariable Long projectId, @PathVariable Long taskId) {
 		
-		Task task = taskService.getTask(taskId);
+		Task task = this.taskService.getTask(taskId);
 		model.addAttribute("task", task);
 		
-		List<Tag> tagsNotAdded = this.tagService.getTagNotAdded(task);
-		model.addAttribute("notMembers", tagsNotAdded);
+		Project project = this.projectService.getProject(projectId);
+		model.addAttribute("project", project);
 		
-		List<Tag> tagsAdded = this.tagService.getTagAdded(task);
+		List<Tag> tagsNotAdded = this.tagService.getTagsNotAdded(task, project);
+		model.addAttribute("tagsNotAdded", tagsNotAdded);
+		
+		List<Tag> tagsAdded = this.tagService.getTagsAdded(task, project);
 		model.addAttribute("tagsAdded", tagsAdded);
 		
 		//model.addAttribute("loggedUser", this.sessionData.getLoggedCredentials());
 		
 		return "manageTags";
 	}
-
+	
+	@RequestMapping(value = { "/project/{projectId}/task/{taskId}/assignTag/{tagId}" }, method = RequestMethod.GET)
+	public String assignTag(Model model, @PathVariable Long projectId, @PathVariable Long taskId, @PathVariable Long tagId) {
+		
+		Task task = this.taskService.getTask(taskId);
+		Project project = this.projectService.getProject(projectId);
+		if(this.sessionData.getLoggedUser().equals(project.getOwner())) {
+			Tag tag = this.tagService.getTag(tagId);
+			task.addTag(tag);
+			tag.addTask(task);
+			this.taskService.saveTask(task);
+		}
+		
+		return "redirect:/project/{projectId}/task/{taskId}/manageTag";
+	}
+	
+	@RequestMapping(value = { "/project/{projectId}/task/{taskId}/unassignTag/{tagId}" }, method = RequestMethod.GET)
+	public String unassignTag(Model model, @PathVariable Long projectId, @PathVariable Long taskId, @PathVariable Long tagId) {
+		
+		Task task = this.taskService.getTask(taskId);
+		Project project = this.projectService.getProject(projectId);
+		if(this.sessionData.getLoggedUser().equals(project.getOwner())) {
+			Tag tag = this.tagService.getTag(tagId);
+			task.removeTag(tag);
+			tag.removeTask(task);
+			this.taskService.saveTask(task);
+		}
+		
+		return "redirect:/project/{projectId}/task/{taskId}/manageTag";
+	}
 }

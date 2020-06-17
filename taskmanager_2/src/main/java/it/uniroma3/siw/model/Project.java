@@ -35,8 +35,8 @@ public class Project {
 	@ManyToMany
 	List<User> members;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="project_id")
+	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@JoinColumn(name="project_id")
 	Set<Task> tasks;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

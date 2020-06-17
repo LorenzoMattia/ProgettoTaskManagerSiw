@@ -7,15 +7,16 @@
 	</head>
 
 	<body>
+		<h1>Tags of project <label th:text="${project.name}"></label> to the task <label th:text="${task.name}"></label></h1>
 		<table>
 			<tr>
-				<td><h1 style="margin-right:100px;">All tags</h1></td><td><h1>All NOT tags</h1></td>
+				<td><h2 style="margin-right:100px;">Assigned tags</h2></td><td><h2>Unassigned tags</h2></td>
 			</tr>
 			<tr>
 				<td>
 					<div>
 						<ul th:each="tagAdded : ${tagsAdded}">
-							<li><a th:href="'/project/' + ${project.id} + '/removeTag/' + ${tagAdded.id}" th:text="${tagAdded.firstname} + ' ' + ${tagAdded.lastname}"></a></li>
+							<li><a th:href="'/project/' + ${project.id} + '/task/' + ${task.id} + '/unassignTag/' + ${tagAdded.id}" th:text="${tagAdded.name}"></a></li>
 						</ul>
 					</div>
 				</td>
@@ -23,7 +24,7 @@
 					<div>
 						
 						<ul th:each="tagNotAdded : ${tagsNotAdded}">
-							<li><a th:href="'/project/' + ${project.id} + '/addtag/' + ${tagNotAdded.id}" th:text="${tagNotAdded.firstname} + ' ' + ${tagNotAdded.lastname}"></a></li>
+							<li><a th:href="'/project/' + ${project.id} + '/task/' + ${task.id} + '/assignTag/' + ${tagNotAdded.id}" th:text="${tagNotAdded.name}"></a></li>
 						</ul>
 					</div>
 				</td>

@@ -22,7 +22,7 @@
 	</div>
 	
 	<!-- <h2>Tags</h2> -->
-	<a th:href = "'/task/' + ${task.id} + '/manageTag'">Add tag</a>
+	<a th:href = "'/project/' + ${project.id} + '/task/' + ${task.id} + '/manageTag'">Manage tag</a>
 	<div th:if="${task.tags.size() > 0}">
 		<h3>Tags</h3>
 		<ul>

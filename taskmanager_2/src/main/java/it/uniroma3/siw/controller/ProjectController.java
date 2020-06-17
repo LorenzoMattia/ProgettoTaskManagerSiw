@@ -172,17 +172,15 @@ public class ProjectController {
 								BindingResult projectBindingResult,
 								@PathVariable Long projectId,
 								Model model) {
-		User loggedUser = this.sessionData.getLoggedUser();
+		
 		projectValidator.validate(project, projectBindingResult);
 		if(!projectBindingResult.hasErrors()) {
 			Project p = this.projectService.getProject(projectId);
 			p.setName(project.getName());
 			p.setDescription(project.getDescription());
-			p.setOwner(loggedUser);
 			this.projectService.saveProject(p);
 			return "redirect:/project/" + p.getId();
 		}
-		model.addAttribute(loggedUser);
 		return "updateProject";
 	}
 	

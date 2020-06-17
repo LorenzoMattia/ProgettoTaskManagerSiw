@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -24,6 +25,10 @@ public class Task {
 	boolean completed;
 	LocalDateTime creationTimeStamp;
 	LocalDateTime lastUpdateTimeStamp;
+	
+	@ManyToOne
+	//@Column(nullable = false)
+	Project project;
 	
 	@ManyToMany
 	List<Tag> tags;
@@ -130,6 +135,14 @@ public class Task {
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
+	
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
+	}
+	
+	public void removeTag(Tag tag) {
+		this.tags.remove(tag);
+	}
 
 	public List<User> getMembers() {
 		return members;
@@ -138,4 +151,13 @@ public class Task {
 	public void setMembers(List<User> members) {
 		this.members = members;
 	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+	
 }

@@ -44,7 +44,6 @@ public class TaskService {
 	@Transactional
 	public void deleteById(Long taskId) {
 		this.taskRepository.deleteById(taskId);
-		
-	}	
-	
+	}
+
 }
