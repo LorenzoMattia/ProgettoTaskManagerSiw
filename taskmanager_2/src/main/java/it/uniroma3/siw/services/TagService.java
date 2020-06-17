@@ -11,8 +11,14 @@ import it.uniroma3.siw.model.Tag;
 import it.uniroma3.siw.model.Task;
 import it.uniroma3.siw.repository.TagRepository;
 
+
 @Service
 public class TagService {
+
+	public List<Tag> getTagNotAdded(Task task) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Autowired
 	private TagRepository tagRepository;

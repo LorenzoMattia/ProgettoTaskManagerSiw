@@ -172,15 +172,18 @@ public class ProjectController {
 								BindingResult projectBindingResult,
 								@PathVariable Long projectId,
 								Model model) {
-		
+
 		projectValidator.validate(project, projectBindingResult);
 		if(!projectBindingResult.hasErrors()) {
 			Project p = this.projectService.getProject(projectId);
 			p.setName(project.getName());
 			p.setDescription(project.getDescription());
+
 			this.projectService.saveProject(p);
 			return "redirect:/project/" + p.getId();
 		}
+		project.setId(projectId);
+		model.addAttribute("project", project);
 		return "updateProject";
 	}
 	
@@ -191,7 +194,7 @@ public class ProjectController {
 		return "redirect:/projects";
 	}
 	
-	@RequestMapping(value = { "/project/tasks/delete/{taskId}/{projectId}" }, method = RequestMethod.POST)
+	/*@RequestMapping(value = { "/project/tasks/delete/{taskId}/{projectId}" }, method = RequestMethod.POST)
 	public String deleteTaskFromProject(@PathVariable ("taskId") Long taskId,
 							 			@PathVariable ("projectId") Long projectId, Model model) {
 		User loggedUser = this.sessionData.getLoggedUser();
@@ -203,6 +206,6 @@ public class ProjectController {
 			return "redirect:/project/" + projectId;
 		}
 		return "redirect:/project/" + projectId;
-	}
+	}*/
 		
 }

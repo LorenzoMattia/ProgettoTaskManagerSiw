@@ -98,6 +98,8 @@ public class UserController {
 			this.sessionData.removeCredentials();
 			return "updateSuccessful";
 		}
+		credentials.setId(credentialsId);
+		model.addAttribute("Credentials", credentials);
 		return "updateProfile";
 	}
 

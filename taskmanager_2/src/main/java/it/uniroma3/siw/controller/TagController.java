@@ -46,15 +46,15 @@ public class TagController {
 			BindingResult bindingResult) {
 		
 		this.tagValidator.validate(tag, bindingResult);
-		
+		Project project = this.projectService.getProject(projectId);
 		if(!bindingResult.hasErrors()) {
-			Project project = this.projectService.getProject(projectId);
 			project.addTag(tag);
 			this.projectService.saveProject(project);
 			
 			return "redirect:/project/{projectId}"; //DA RIVEDERE
 		}
-		
+		model.addAttribute("tag", tag);
+		model.addAttribute("project", project);
 		return "createTag";
 	}
 	

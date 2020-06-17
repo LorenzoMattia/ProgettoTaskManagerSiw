@@ -78,7 +78,7 @@ public class TaskController {
 			p.getTasks().add(task);
 			task.setProject(p);
 			this.projectService.saveProject(p);
-			return "redirect:/projects";
+			return "redirect:/project/" + projectId;
 		}
 		//return "redirect:/addTask/" + projectId;
 		model.addAttribute("project", p);
@@ -105,18 +105,38 @@ public class TaskController {
 		this.taskValidator.validate(task, taskBindingResult);
 		Task t = this.taskService.getTask(taskId);
 		Project p = this.projectService.getProject(projectId);
-		if(!taskBindingResult.hasErrors()) {
-			if(loggedUser.equals(owner)) {
-				t.setName(task.getName());
-				t.setDescription(task.getDescription());
-				this.taskService.saveTask(t);
-				return "redirect:/project/" + projectId;
-			}
+		if(!taskBindingResult.hasErrors() && loggedUser.equals(owner)) {
+			t.setName(task.getName());
+			t.setDescription(task.getDescription());
+			this.taskService.saveTask(t);
+			return "redirect:/project/" + projectId;
 		}
-		//return "/task/updateForm/" + taskId + "/" + projectId; 
-		model.addAttribute("task", t);
+		//return "/task/updateForm/" + taskId + "/" + projectId;
+		//task.setId(taskId);
+		model.addAttribute("task", task);
 		model.addAttribute("project", p);
 		return "updateTask";
+		//return "redirect:/task/updateForm/{taskId}/{projectId}";
+	}
+	
+	@RequestMapping(value = { "/tasks/delete/{taskId}/{projectId}" }, method = RequestMethod.POST)
+	public String deleteTask(@PathVariable Long taskId,
+							 @PathVariable Long projectId,
+							 Model model) {
+		Task task = this.taskService.getTask(taskId);
+		Project project = this.projectService.getProject(projectId);
+		
+		User owner = project.getOwner();
+		User loggedUser = this.sessionData.getLoggedUser();
+		
+		if(owner.equals(loggedUser)) {
+			project.getTasks().remove(task);
+			this.projectService.saveProject(project);
+			
+			this.taskService.deleteTask(task);
+			return "redirect:/project/" + projectId;
+		}
+		return "redirect:/project/" + projectId;
 	}
 	
 	@RequestMapping(value = { "/task/assignUserToTask/{taskId}/{projectId}" }, method = RequestMethod.GET)
