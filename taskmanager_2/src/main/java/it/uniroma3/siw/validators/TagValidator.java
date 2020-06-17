@@ -25,7 +25,7 @@ public class TagValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Tag tag = (Tag) target;
 		String name = tag.getName().trim();
-		String color = tag.getDescription().trim();
+		String color = tag.getColor().trim();
 		String description = tag.getDescription().trim();
 		
 		if(name.isEmpty())

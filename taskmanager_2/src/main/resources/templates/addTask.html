@@ -15,12 +15,12 @@
 			<tr>
 				<td><label for= "taskNameInput">Task Name</label>
 				<td><input id= taskNameInput type = "text" placeholder="Name" required th:field="${task.name}"/></td>
-				<td th:if="${#fields.hasErrors('task.name')}" th:error="${task.name}" th:style="'color:red'"></td>
+				<td th:if="${#fields.hasErrors('task.name')}" th:errors="${task.name}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td><label for= "taskDescriptionInput">Task Description</label>
 				<td><input id= taskDescriptionInput placeholder="Description" required th:field="${task.description}"/></td>
-				<td th:if="${#fields.hasErrors('task.description')}" th:error="${task.description}" th:style="'color:red'"></td>
+				<td th:if="${#fields.hasErrors('task.description')}" th:errors="${task.description}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Add Task</button>

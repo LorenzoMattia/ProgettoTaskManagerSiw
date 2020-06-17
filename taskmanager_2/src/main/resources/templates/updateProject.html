@@ -15,12 +15,12 @@
 			<tr>
 				<td><label for= "projectNameInput">Project Name</label>
 				<td><input id= projectNameInput type = "text" placeholder="Name" required th:field="*{name}"/></td>
-				<td th:if="${#fields.hasErrors('name')}" th:error="*{name}" th:style="'color:red'"></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td><label for= "projectDescriptionInput">Project Description</label>
 				<td><input id= projectDescriptionInput placeholder="Description" required th:field="*{description}"/></td>
-				<td th:if="${#fields.hasErrors('description')}" th:error="*{description}" th:style="'color:red'"></td>
+				<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:style="'color:red'"></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Register</button>
