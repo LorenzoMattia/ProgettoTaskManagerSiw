@@ -4,16 +4,14 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta charset= "utf-8"/>
+		<title>Edit tag</title>
 		<link rel="stylesheet" type="text/css" href="../../../../../../css/homeStyle.css"/>
-		<title>Create a tag</title>
-		
 	</head>
 	<body>
-		<h2>Create a tag</h2>
+		<h2>Edit tag</h2>
 		<form
 			th:object="${tag}"
-			th:action=" @{'/project/' + ${project.id} + '/tag/create'} "
+			th:action=" @{'/project/' + ${project.id} + '/editTag/' + ${tag.id}} "
 			method="POST">
 			<table>
 				<tr>
@@ -32,7 +30,7 @@
 					<td th:if="${#fields.hasErrors('description')}" th:errors="description" th:style="'Color:red'"></td>
 				</tr>
 				<tr>
-					<td><button type="submit">Create tag</button></td>
+					<td><button type="submit">Edit tag</button></td>
 				</tr>	
 			</table>
 		</form>

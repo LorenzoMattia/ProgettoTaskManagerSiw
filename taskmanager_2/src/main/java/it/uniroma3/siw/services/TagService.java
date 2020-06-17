@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.model.Project;
 import it.uniroma3.siw.model.Tag;
@@ -14,11 +15,6 @@ import it.uniroma3.siw.repository.TagRepository;
 
 @Service
 public class TagService {
-
-	public List<Tag> getTagNotAdded(Task task) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Autowired
 	private TagRepository tagRepository;
@@ -34,6 +30,11 @@ public class TagService {
 	public Tag getTag(Long tagId) {
 		Optional<Tag> result = this.tagRepository.findById(tagId);
 		return result.orElse(null);
+	}
+
+	@Transactional
+	public void saveTag(Tag tag) {
+		this.tagRepository.save(tag);
 	}	
 	
 }

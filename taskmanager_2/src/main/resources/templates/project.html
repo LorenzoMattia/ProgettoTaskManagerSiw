@@ -4,13 +4,13 @@
 	  xmlns:th = "https://www.thymeleaf.org">
 <head>
 	<title>TaskManager</title>
+	<link rel="stylesheet" type="text/css" href="../../../../../../css/homeStyle.css"/>
 </head>
 
 <body>
 	<h1 th:text="${project.name}"></h1>
 	<h4 th:text="${project.description}" style= "color:gray"></h4>
 	
-	<!-- <a th:if="${my=='true'}" th:href="${project.id}+'/manageMembers'">Manage member</a> -->
 	<a th:if="${my=='true'}" th:href="${project.id} + '/manageMembers'">Manage member</a>
 	<div th:if="${members.size() > 0}">
 		<h3>Shared with: </h3>
@@ -38,11 +38,12 @@
 	<p><a th:href="${project.id} + '/tag/create'">Create a tag</a></p>
 	<div>
 		<ul>
-			<li th:each = "tag: ${project.tags}" style="border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px;">
-				<h3 th:text="${tag.name}" style="margin:5px;"></h3>
-				<i th:text="${tag.color}" style="margin:10px;"></i>
-				<div th:text="${tag.description}" style="margin:5px;"></div>
+			<li th:each = "tag: ${project.tags}" th:style="'border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px; color:'+${tag.color}">
+				<h3 th:text="${tag.name}" style="margin:5px; color:black;"></h3>
+				<i th:text="${tag.color}" style="margin:15px;"></i>
+				<div th:text="${tag.description}" style="margin:5px; color:black;"></div>
 				<br/>
+				<a th:href="'/project/' + ${project.id} + '/editTag/' + ${tag.id}" style="margin:5px;">Edit tag</a>
 			</li> 
 		</ul>
 	</div>

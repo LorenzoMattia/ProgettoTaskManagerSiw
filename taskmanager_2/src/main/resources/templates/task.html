@@ -4,6 +4,7 @@
 	  xmlns:th = "https://www.thymeleaf.org">
 <head>
 	<title>TaskManager</title>
+	<link rel="stylesheet" type="text/css" href="../../../../../../css/homeStyle.css"/>
 </head>
 
 <body>
@@ -22,7 +23,7 @@
 	</div>
 	
 	<!-- <h2>Tags</h2> -->
-	<a th:href = "'/project/' + ${project.id} + '/task/' + ${task.id} + '/manageTag'">Manage tag</a>
+	<a th:href = "'/project/' + ${project.id} + '/task/' + ${task.id} + '/manageTag'">Manage tags</a>
 	<div th:if="${task.tags.size() > 0}">
 		<h3>Tags</h3>
 		<ul>
@@ -30,6 +31,7 @@
 				<h3 th:text="${tag.name}" style="margin:5px;"></h3>
 				<i th:text="${tag.color}" style="margin:10px;"></i>
 				<div th:text="${tag.description}" style="margin:5px;"></div>
+				<a th:href="'/tag/' + ${tag.id} + '/editTag'">Edit tag</a>
 				<br/>
 			</li> 
 		</ul>
