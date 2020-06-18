@@ -9,6 +9,7 @@
 	
 	<body>
 		<div class="content">
+			<h2>Update project</h2>
 			<form id= "updateProjectForm"
 				  th:action = "@{'/projects/update/' + ${project.id}}"
 				  th:object = "${project}"
@@ -25,10 +26,11 @@
 						<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:style="'color:red'"></td>
 					</tr>
 					<tr>
-						<td><button type="submit">Register</button>
+						<td><br/><button type="submit">Update</button>
 					</tr>
-				</table>	  
+				</table>	
 			</form>
+			
 		</div>
 		<footer>
 			<a href="/main/home">Torna alla home</a>
