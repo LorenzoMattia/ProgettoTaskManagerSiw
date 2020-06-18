@@ -1,12 +1,10 @@
 package it.uniroma3.siw.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +17,6 @@ import it.uniroma3.siw.controller.session.SessionData;
 import it.uniroma3.siw.model.Project;
 import it.uniroma3.siw.model.Task;
 import it.uniroma3.siw.model.User;
-import it.uniroma3.siw.repository.ProjectRepository;
 import it.uniroma3.siw.services.ProjectService;
 import it.uniroma3.siw.services.UserService;
 import it.uniroma3.siw.validators.ProjectValidator;

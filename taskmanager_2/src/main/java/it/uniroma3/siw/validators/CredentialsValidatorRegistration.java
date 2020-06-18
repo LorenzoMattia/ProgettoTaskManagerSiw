@@ -10,7 +10,7 @@ import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.services.CredentialsService;
 
 @Component
-public class CredentialsValidatorWithoutPassword implements Validator {
+public class CredentialsValidatorRegistration implements Validator {
 
 	@Autowired
 	CredentialsService credentialsService;
@@ -33,6 +33,7 @@ public class CredentialsValidatorWithoutPassword implements Validator {
 		Credentials credentials = (Credentials) target;
 		
 		String username = credentials.getUsername().trim();
+		String password = credentials.getPassword().trim();
 		
 		if(username.isEmpty())
 			errors.rejectValue("username", "required");
@@ -40,11 +41,16 @@ public class CredentialsValidatorWithoutPassword implements Validator {
 		else if(username.length()<this.MIN_USERNAME_LENGTH || username.length()>this.MAX_USERNAME_LENGTH)
 			errors.rejectValue("username", "size");
 		
-		else if(this.credentialsService.getCredentials(username)!=null 
-				&& !username.equals(this.sessionData.getLoggedCredentials().getUsername())) {
+		else if(this.credentialsService.getCredentials(username)!=null) {
 			errors.rejectValue("username", "duplicate");
 		}
-
+			
+		
+		if(password.isEmpty()) {
+			errors.rejectValue("password", "required");
+		}
+		else if(password.length()<this.MIN_PASSWORD_LENGTH || password.length()>this.MAX_PASSWORD_LENGTH)
+			errors.rejectValue("password", "size");
 	}
 
 }

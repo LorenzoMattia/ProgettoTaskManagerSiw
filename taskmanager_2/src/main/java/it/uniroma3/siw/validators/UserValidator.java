@@ -1,14 +1,6 @@
 package it.uniroma3.siw.validators;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.executable.ExecutableValidator;
-import javax.validation.metadata.BeanDescriptor;
-
 import org.springframework.stereotype.Component;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

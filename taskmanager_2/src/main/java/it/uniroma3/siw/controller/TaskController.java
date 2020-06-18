@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.controller.session.SessionData;
-import it.uniroma3.siw.model.Comment;
 import it.uniroma3.siw.model.Project;
 import it.uniroma3.siw.model.Tag;
 import it.uniroma3.siw.model.Task;
