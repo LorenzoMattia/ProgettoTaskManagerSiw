@@ -5,10 +5,13 @@
 	<head>
 		<title>TaskManager</title>
 		<link rel="stylesheet" type="text/css" href="../../../../../../css/general.css"/>
+		<style type="text/css">
+			table {padding:5px;}
+		</style>
 	</head>
 	
 	<body>
-		<div class="content">
+		<div class="content" style="max-width:400px;">
 			<h1>Your Profile</h1>
 			<table>
 			  	<tr th:if = "${mine == 'true'}"><td>Username</td><td th:text = "${credentials.username}"></td></tr>
@@ -18,6 +21,7 @@
 			  	<tr><td>Registered at: </td><td th:text = "${user.creationTimeStamp}"></td></tr>
 			  	<tr><td>Last Update at: </td><td th:text = "${user.lastUpdateTimeStamp}"></td></tr>
 			</table>
+			<br/>
 			<p th:if = "${mine == 'true'}"><a href="/users/updateForm">Update Profile</a></p>
 		</div>
 		<footer>
