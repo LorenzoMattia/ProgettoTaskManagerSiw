@@ -8,8 +8,8 @@
 	</head>
 	
 	<body>
-		<div class="content">
-			<h1>Register new User</h1>
+		<div class="content" style="max-width:500px; margin-top:200px;">
+			<h1 style="margin-left:20px;">Register new User</h1>
 			<form id = "registerUserForm"
 				  th:action = "@{/users/register}"
 				  method= "POST">
@@ -47,7 +47,7 @@
 				  			th:style="'Color:red'"></td>
 				  	</tr>
 				  	<tr>
-				  		<td><button type="submit">Register</button></td>
+				  		<td><br/><button type="submit" style="margin-left:20px;">Register</button></td>
 				  	</tr>
 				</table>
 			</form>
