@@ -49,8 +49,4 @@ public class SessionData {
 	public void removeCredentials() {
 		this.credentials = null;
 	}
-	
-	public void clear() {
-		SecurityContextHolder.clearContext();
-	}
 }
