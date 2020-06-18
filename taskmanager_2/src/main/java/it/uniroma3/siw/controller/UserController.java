@@ -19,6 +19,7 @@ import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.services.CredentialsService;
 import it.uniroma3.siw.services.UserService;
 import it.uniroma3.siw.validators.CredentialsValidator;
+import it.uniroma3.siw.validators.CredentialsValidatorWithoutPassword;
 import it.uniroma3.siw.validators.UserValidator;
 
 @Controller
@@ -38,6 +39,9 @@ public class UserController {
 	
 	@Autowired
 	CredentialsValidator credentialsValidator;
+
+	@Autowired
+	CredentialsValidatorWithoutPassword credentialsValidatorWithoutPassword;
 	
 	@RequestMapping(value = {"/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
@@ -82,19 +86,27 @@ public class UserController {
 						 BindingResult credentialsBindingResult,
 						 @PathVariable ("credentialsId") Long credentialsId,
 						 Model model) {
+		
 		this.userValidator.validate(user, userBindingResult);
-		this.credentialsValidator.validate(credentials, credentialsBindingResult);
-
+		
+		if(!credentials.getPassword().isEmpty())
+			this.credentialsValidator.validate(credentials, credentialsBindingResult);
+		else
+			this.credentialsValidatorWithoutPassword.validate(credentials, credentialsBindingResult);
+		
 		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
 			Credentials c = this.credentialsService.getCredentials(credentialsId);
 			User u = c.getUser();
 			u.setFirstname(user.getFirstname());
 			u.setLastname(user.getLastname());
 			c.setUsername(credentials.getUsername());
-			if(!credentials.getPassword().isEmpty())
-				c.setPassword(credentials.getPassword());
 			credentials.setUser(u);
-			credentialsService.saveCredentials(c);
+			if(!credentials.getPassword().isEmpty()) {
+				c.setPassword(credentials.getPassword());
+				credentialsService.saveCredentials(c);
+			}
+			else
+				credentialsService.saveCredentialsWithoutPassword(c);
 			this.sessionData.removeUser();
 			this.sessionData.removeCredentials();
 			return "updateSuccessful";

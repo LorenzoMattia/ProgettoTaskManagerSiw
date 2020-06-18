@@ -12,7 +12,7 @@ import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.services.CredentialsService;
 
 @Component
-public class CredentialsValidator implements Validator { //bisognerebbe spostare il package validators in controller e rinominarlo in validation
+public class CredentialsValidatorWithoutPassword implements Validator { //bisognerebbe spostare il package validators in controller e rinominarlo in validation
 
 	@Autowired
 	CredentialsService credentialsService;
@@ -32,7 +32,6 @@ public class CredentialsValidator implements Validator { //bisognerebbe spostare
 		Credentials credentials = (Credentials) target;
 		
 		String username = credentials.getUsername().trim();
-		String password = credentials.getPassword().trim();
 		
 		if(username.isEmpty())
 			errors.rejectValue("username", "required");
@@ -43,13 +42,6 @@ public class CredentialsValidator implements Validator { //bisognerebbe spostare
 		else if(this.credentialsService.getCredentials(username)!=null) {
 			errors.rejectValue("username", "duplicate");
 		}
-			
-		
-		if(password.isEmpty()) {
-			errors.rejectValue("password", "required");
-		}
-		else if(password.length()<this.MIN_PASSWORD_LENGTH || password.length()>this.MAX_PASSWORD_LENGTH)
-			errors.rejectValue("password", "size");
 
 	}
 	
