@@ -28,7 +28,7 @@
 			<div>
 				<h2>Task</h2>
 				<ul>
-					<li th:each = "task: ${project.tasks}" style="border:DOTTED; border-radius:10px; width:600px; padding:10px; margin:5px;">
+					<li th:each = "task: ${project.tasks}" style="border:SOLID; border-width:2px; border-radius:10px; width:600px; padding:10px; margin:5px;">
 						<h3><div th:text="${task.name}"></div></h3>
 						<div th:text="${task.description}"></div>
 						<br/>
@@ -38,6 +38,7 @@
 						<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Update</a>
 						<a th:href="'/task/viewTask/' + ${task.id} + '/' + ${project.id}">View</a>
 						<a th:href="'/task/commentForm/' + ${task.id} + '/' + ${project.id}">Comment</a>
+						<br/><br/>
 					</li>
 				</ul>
 			</div>

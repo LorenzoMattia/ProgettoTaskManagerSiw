@@ -13,7 +13,8 @@
 				  th:action = "'/task/comment/' + ${task.id} + '/' + ${project.id}"
 				  method = POST>
 				 <label for="taskCommentInput">Commento</label></td>
-				 <input id=taskCommentInput type="text" placeholder="Commento" required th:field="${comment.text}"></input>
+				 <input id=taskCommentInput type="text" placeholder="Inserisci il tuo commento qui" required th:field="${comment.text}" style="width:300px;"></input>
+				 <br/><br/>
 				 <div><button type="submit">Commenta</button></div>
 			</form>
 			</div>
