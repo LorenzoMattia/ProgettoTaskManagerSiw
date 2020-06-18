@@ -2,49 +2,52 @@
 <html lang= "en"
 	  xmlns = "http://www.w3.org/1999/xhtml"
 	  xmlns:th = "https://www.thymeleaf.org">
-<head>
-	<title>TaskManager</title>
-	<link rel="stylesheet" type="text/css" href="../../../../../../css/homeStyle.css"/>
-</head>
-
-<body>
-	<h1 th:text="${task.name}"></h1>
-	<h4 th:text="${task.description}" style= "color:gray"></h4>
+	<head>
+		<title>TaskManager</title>
+		<link rel="stylesheet" type="text/css" href="../../../../../../css/general.css"/>
+	</head>
 	
-	<!-- <h2>Members</h2> -->
-	<a th:href = "'/task/assignUserToTask/' + ${task.id} + '/' + ${project.id}">Add member</a>
-	<div th:if="${members.size() > 0}">
-		<h3>Assigned to: </h3>
-		<ul>
-			<li th:each="member : ${members}">
-				<a th:href = "'/users/me/' + ${member.id}" th:text = "${member.firstname} + ' ' + ${member.lastname}"></a>
-			</li>
-		</ul>
-	</div>
-	
-	<!-- <h2>Tags</h2> -->
-	<a th:href = "'/project/' + ${project.id} + '/task/' + ${task.id} + '/manageTag'">Manage tags</a>
-	<div th:if="${task.tags.size() > 0}">
-		<h3>Tags</h3>
-		<ul>
-			<li th:each = "tag: ${task.tags}" style="border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px;">
-				<h3 th:text="${tag.name}" style="margin:5px;"></h3>
-				<i th:text="${tag.color}" style="margin:10px;"></i>
-				<div th:text="${tag.description}" style="margin:5px;"></div>
-				<a th:href="'/tag/' + ${tag.id} + '/editTag'">Edit tag</a>
-				<br/>
-			</li> 
-		</ul>
-	</div>
-	
-	<div th:if="${task.comments.size() > 0}">
-		<h3>Comments</h3>
-		<ul>
-			<li th:each = "comment: ${task.comments}" style="border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px;">
-				<h3 th:text="${comment.text}" style="margin:5px;"></h3>
-				<h3 th:text="${comment.owner}" style="margin:5px;"></h3>
-				<br/>
-			</li> 
-		</ul>
-	</div>
-</body>
+	<body>
+		<div class="content">
+			<h1 th:text="${task.name}"></h1>
+			<h4 th:text="${task.description}" style= "color:gray"></h4>
+			
+			<!-- <h2>Members</h2> -->
+			<a th:href = "'/task/assignUserToTask/' + ${task.id} + '/' + ${project.id}">Add member</a>
+			<div th:if="${members.size() > 0}">
+				<h3>Assigned to: </h3>
+				<ul>
+					<li th:each="member : ${members}">
+						<a th:href = "'/users/me/' + ${member.id}" th:text = "${member.firstname} + ' ' + ${member.lastname}"></a>
+					</li>
+				</ul>
+			</div>
+			
+			<!-- <h2>Tags</h2> -->
+			<a th:href = "'/project/' + ${project.id} + '/task/' + ${task.id} + '/manageTag'">Manage tags</a>
+			<div th:if="${task.tags.size() > 0}">
+				<h3>Tags</h3>
+				<ul>
+					<li th:each = "tag: ${task.tags}" style="border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px;">
+						<h3 th:text="${tag.name}" style="margin:5px;"></h3>
+						<i th:text="${tag.color}" style="margin:10px;"></i>
+						<div th:text="${tag.description}" style="margin:5px;"></div>
+						<a th:href="'/tag/' + ${tag.id} + '/editTag'">Edit tag</a>
+						<br/>
+					</li> 
+				</ul>
+			</div>
+			
+			<div th:if="${task.comments.size() > 0}">
+				<h3>Comments</h3>
+				<ul>
+					<li th:each = "comment: ${task.comments}" style="border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px;">
+						<h3 th:text="${comment.text}" style="margin:5px;"></h3>
+						<h3 th:text="${comment.owner}" style="margin:5px;"></h3>
+						<br/>
+					</li> 
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

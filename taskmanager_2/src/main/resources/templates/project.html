@@ -2,52 +2,59 @@
 <html lang= "en"
 	  xmlns = "http://www.w3.org/1999/xhtml"
 	  xmlns:th = "https://www.thymeleaf.org">
-<head>
-	<title>TaskManager</title>
-	<link rel="stylesheet" type="text/css" href="../../../../../../css/homeStyle.css"/>
-</head>
-
-<body>
-	<h1 th:text="${project.name}"></h1>
-	<h4 th:text="${project.description}" style= "color:gray"></h4>
+	<head>
+		<title>TaskManager</title>
+		<link rel="stylesheet" type="text/css" href="../../../../../../css/general.css"/>
+	</head>
 	
-	<a th:if="${my=='true'}" th:href="${project.id} + '/manageMembers'">Manage member</a>
-	<div th:if="${members.size() > 0}">
-		<h3>Shared with: </h3>
-		<ul>
-			<li th:each="member : ${members}">
-				<div th:text="${member.firstname} + ' ' + ${member.lastname}"></div>
-		</ul>
-	</div>
-	
-	<h3>Task</h3>
-	<ul>
-		<li th:each = "task: ${project.tasks}" style="border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px;">
-			<div th:text="${task.name}"></div>
-			<div th:text="${task.description}"></div>
-			<form method="POST" th:action="@{'/tasks/delete/' + ${task.id} + '/' + ${project.id}}">
-				<button type="submit" name="submit" value="value">Elimina</button>
-			</form>
-			<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Aggiorna</a>
-			<div><a th:href="'/task/viewTask/' + ${task.id} + '/' + ${project.id}">Visualizza</a></div>
-			<div><a th:href="'/task/commentForm/' + ${task.id} + '/' + ${project.id}">Commenta</a></div>
-		</li>
-	</ul>
-	<p><a th:href="'/task/add/' + ${project.id}">Add new task</a></p>
-	
-	<h2>Project's tags</h2>
-	<p><a th:href="${project.id} + '/tag/create'">Create a tag</a></p>
-	<div>
-		<ul>
-			<li th:each = "tag: ${project.tags}" th:style="'border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px; color:'+${tag.color}">
-				<h3 th:text="${tag.name}" style="margin:5px; color:black;"></h3>
-				<i th:text="${tag.color}" style="margin:15px;"></i>
-				<div th:text="${tag.description}" style="margin:5px; color:black;"></div>
-				<br/>
-				<a th:href="'/project/' + ${project.id} + '/editTag/' + ${tag.id}" style="margin:5px;">Edit tag</a>
-			</li> 
-		</ul>
-	</div>
-	
-	<p><a th:href="'/projects/updateForm/' + ${project.id}">Update project</a>
-</body>
+	<body>
+		<div class="content" style="margin-top:50px">
+			<h1 th:text="${project.name}"></h1>
+			<h4 th:text="${project.description}" style="color:gray; margin-left:80px;"></h4>
+			<br/>
+			<a th:if="${my=='true'}" th:href="${project.id} + '/manageMembers'">Manage member</a>
+			<a th:href="'/projects/updateForm/' + ${project.id}">Update project</a>
+			<a th:href="'/task/add/' + ${project.id}">Add new task</a>
+			<a th:href="${project.id} + '/tag/create'">Create a tag</a>
+			<br/><br/>
+			<div th:if="${members.size() > 0}">
+				<h2>Shared with: </h2>
+				<ul>
+					<li th:each="member : ${members}">
+						<div th:text="${member.firstname} + ' ' + ${member.lastname}"></div>
+				</ul>
+			</div>
+			<br/>
+			<div>
+				<h2>Task</h2>
+				<ul>
+					<li th:each = "task: ${project.tasks}" style="border:DOTTED; border-radius:10px; width:600px; padding:10px; margin:5px;">
+						<div th:text="${task.name}"></div>
+						<div th:text="${task.description}"></div>
+						<br/>
+						<form method="POST" th:action="@{'/tasks/delete/' + ${task.id} + '/' + ${project.id}}" style="display:inline;">
+							<button type="submit" name="submit" value="value">Elimina</button>
+						</form>
+						<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Aggiorna</a>
+						<a th:href="'/task/viewTask/' + ${task.id} + '/' + ${project.id}">Visualizza</a>
+						<a th:href="'/task/commentForm/' + ${task.id} + '/' + ${project.id}">Commenta</a>
+					</li>
+				</ul>
+			</div>
+			<br/>
+			<h2>Project's tags</h2>
+			<div>
+				<ul>
+					<li th:each = "tag: ${project.tags}" th:style="'border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px; color:'+${tag.color}">
+						<h3 th:text="${tag.name}" style="margin:5px; color:black;"></h3>
+						<i th:text="${tag.color}" style="margin:15px;"></i>
+						<div th:text="${tag.description}" style="margin:5px; color:black;"></div>
+						<br/>
+						<a th:href="'/project/' + ${project.id} + '/editTag/' + ${tag.id}" style="margin:5px;">Edit tag</a>
+						<br/><br/>
+					</li> 
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

@@ -20,7 +20,7 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	String name;
 	String description;
 	boolean completed;

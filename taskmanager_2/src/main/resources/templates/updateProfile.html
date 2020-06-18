@@ -2,54 +2,55 @@
 <html lang= "en"
 	  xmlns = "http://www.w3.org/1999/xhtml"
 	  xmlns:th = "https://www.thymeleaf.org">
-<head>
-	<title>TaskManager</title>
-	<link rel="stylesheet" type="text/css" href="../../../../../../css/homeStyle.css"/>
-</head>
-
-<body>
-	<h1>Update your profile</h1>
-	<form id = "updateUserForm"
-		  th:action = "@{'/users/update/' + ${Credentials.id}}"
-		  method= "POST">
-		<table>
-		  	<tr>
-		  		<td><label for="userNameInput">Username</label></td>
-		  		<td><input id=userNameInput type="text" placeholder="USERNAME" required
-		  				th:field="${Credentials.username}"></input></td>
-		  		<td th:if="${#fields.hasErrors('Credentials.username')}"
-		  			th:errors="${Credentials.username}"
-		  			th:style="'Color:red'"></td>
-		  	</tr>
-		  	<tr>
-		  		<td><label for="passwordInput">Password</label></td>
-		  		<td><input id=passwordInput type="text" placeholder="PASSWORD" required
-		  				th:field="${Credentials.password}"></input></td>
-		  		<td th:if="${#fields.hasErrors('Credentials.password')}"
-		  			th:errors="${Credentials.password}"
-		  			th:style="'Color:red'"></td>
-		  	</tr>
-		  	<tr>
-		  		<td><label for="firstNameInput">Firstname</label></td>
-		  		<td><input id=firstNameInput type="text" placeholder="FIRSTNAME" required
-		  				th:field="${User.firstname}"></input></td>
-		  		<td th:if="${#fields.hasErrors('User.firstname')}"
-		  			th:errors="${User.firstname}"
-		  			th:style="'Color:red'"></td>
-		  	</tr>
-		  	<tr>
-		  		<td><label for="lastNameInput">Lastname</label></td>
-		  		<td><input id=lastNameInput type="text" placeholder="LASTNAME" required
-		  				th:field="${User.lastname}"></input></td>
-		  		<td th:if="${#fields.hasErrors('User.lastname')}"
-		  			th:errors="${User.lastname}"
-		  			th:style="'Color:red'"></td>
-		  	</tr>
-		  	<tr>
-		  		<td><button type="submit">Update</button></td>
-		  	</tr>
-		</table>
-	</form>
-</body>
-
+	<head>
+		<title>TaskManager</title>
+		<link rel="stylesheet" type="text/css" href="../../../../../../css/general.css"/>
+	</head>
+	
+	<body>
+		<div class="content">
+			<h1>Update your profile</h1>
+			<form id = "updateUserForm"
+				  th:action = "@{'/users/update/' + ${Credentials.id}}"
+				  method= "POST">
+				<table>
+				  	<tr>
+				  		<td><label for="userNameInput">Username</label></td>
+				  		<td><input id=userNameInput type="text" placeholder="USERNAME" required
+				  				th:field="${Credentials.username}"></input></td>
+				  		<td th:if="${#fields.hasErrors('Credentials.username')}"
+				  			th:errors="${Credentials.username}"
+				  			th:style="'Color:red'"></td>
+				  	</tr>
+				  	<tr>
+				  		<td><label for="passwordInput">Password</label></td>
+				  		<td><input id=passwordInput type="text" placeholder="PASSWORD" required
+				  				th:field="${Credentials.password}"></input></td>
+				  		<td th:if="${#fields.hasErrors('Credentials.password')}"
+				  			th:errors="${Credentials.password}"
+				  			th:style="'Color:red'"></td>
+				  	</tr>
+				  	<tr>
+				  		<td><label for="firstNameInput">Firstname</label></td>
+				  		<td><input id=firstNameInput type="text" placeholder="FIRSTNAME" required
+				  				th:field="${User.firstname}"></input></td>
+				  		<td th:if="${#fields.hasErrors('User.firstname')}"
+				  			th:errors="${User.firstname}"
+				  			th:style="'Color:red'"></td>
+				  	</tr>
+				  	<tr>
+				  		<td><label for="lastNameInput">Lastname</label></td>
+				  		<td><input id=lastNameInput type="text" placeholder="LASTNAME" required
+				  				th:field="${User.lastname}"></input></td>
+				  		<td th:if="${#fields.hasErrors('User.lastname')}"
+				  			th:errors="${User.lastname}"
+				  			th:style="'Color:red'"></td>
+				  	</tr>
+				  	<tr>
+				  		<td><button type="submit">Update</button></td>
+				  	</tr>
+				</table>
+			</form>
+		</div>
+	</body>
 </html>

@@ -4,15 +4,19 @@
 	  xmlns:th = "https://www.thymeleaf.org">
 	<head>
 		<meta charset= "utf-8"/>
-		<title>TaskManager</title>
-		<link rel="stylesheet" type="text/css" href="../../../../../../css/homeStyle.css"/>
+		<title>TaskManager</title>	
+		<link rel="stylesheet" type="text/css" href="../../../../../../css/general.css"/>
 	</head>
-<body>
-	<h1 th:text = "'Welcome, ' + ${user.firstname} + '!'"></h1>
-	<h4><a href = "/projects">My Projects</a></h4>
-	<h4><a href = "/projects/shared">Shared with me</a></h4>
-	<h4><a href = "/projects/add">Create new project</a></h4>
-	<h4><a href = "/users/me">Profile</a></h4>
-	<h4><a href = "/logout">logout</a></h4>
-</body>  	  
+	<body align="center">
+		<div class="content">
+			<h1 th:text = "'Welcome, ' + ${user.firstname} + '!'"></h1>
+			<br/><br/><br/>
+			<a href = "/projects">My Projects</a>
+			<a href = "/projects/shared">Shared with me</a>
+			<a href = "/projects/add">Create new project</a>
+			<br/><br/><br/><br/>
+			<a href = "/users/me">Profile</a>
+			<a href = "/logout">Logout</a>
+		</div>
+	</body>  	  
 </html>
