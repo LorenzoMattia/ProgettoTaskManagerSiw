@@ -53,4 +53,10 @@ public class ProjectService {
 		List<Project> projectList = (this.projectRepository.findByMembers(loggedUser));
 		return projectList;
 	}
+
+	@Transactional
+	public Project getProject(String name) {
+		Optional<Project> project = this.projectRepository.findByName(name);
+		return project.orElse(null);
+	}
 }

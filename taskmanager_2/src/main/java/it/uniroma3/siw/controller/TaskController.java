@@ -113,7 +113,7 @@ public class TaskController {
 			return "redirect:/project/" + projectId;
 		}
 		//return "/task/updateForm/" + taskId + "/" + projectId;
-		//task.setId(taskId);
+		task.setId(taskId);
 		model.addAttribute("task", task);
 		model.addAttribute("project", p);
 		return "updateTask";

@@ -42,12 +42,15 @@
 				<h3>Comments</h3>
 				<ul>
 					<li th:each = "comment: ${task.comments}" style="border:DOTTED; border-radius:10px; width:400px; padding:10px; margin:5px;">
-						<h3 th:text="${comment.text}" style="margin:5px;"></h3>
-						<h3 th:text="${comment.owner}" style="margin:5px;"></h3>
+						<h3 th:text="'Testo: ' + ${comment.text}" style="margin:5px;"></h3>
+						<h3 th:text="'Autore: ' + ${comment.owner.firstname} + ' ' + ${comment.owner.lastname}" style="margin:5px;"></h3>
 						<br/>
 					</li> 
 				</ul>
 			</div>
 		</div>
+		<footer>
+			<a href="/main/home">Torna alla home</a>
+		</footer>
 	</body>
 </html>
