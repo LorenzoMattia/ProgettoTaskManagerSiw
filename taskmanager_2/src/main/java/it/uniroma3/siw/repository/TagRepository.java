@@ -16,10 +16,10 @@ public interface TagRepository extends CrudRepository<Tag, Long> {
 
 	@Query(	value = "	SELECT * "
 			+ "	FROM tag t "
-			+ "	WHERE t.id NOT IN "
+			+ "	WHERE project_id=:projectId AND t.id NOT IN "
 			+ "		(SELECT t.id "
 			+ "		FROM tag t, task_tags tt "
-			+ "		WHERE tt.tags_id=t.id AND tt.tasks_id=:taskId AND project_id=:projectId) ",
+			+ "		WHERE tt.tags_id=t.id AND tt.tasks_id=:taskId) ",
 			nativeQuery = true
 	)
 	List<Tag> getTagsNotAddedById(@Param(value = "taskId") Long taskId, @Param(value = "projectId") Long projectId);

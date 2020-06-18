@@ -91,7 +91,8 @@ public class UserController {
 			u.setFirstname(user.getFirstname());
 			u.setLastname(user.getLastname());
 			c.setUsername(credentials.getUsername());
-			c.setPassword(credentials.getPassword());
+			if(!credentials.getPassword().isEmpty())
+				c.setPassword(credentials.getPassword());
 			credentials.setUser(u);
 			credentialsService.saveCredentials(c);
 			this.sessionData.removeUser();
