@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.services.CredentialsService;
-import it.uniroma3.siw.validators.CredentialsValidator;
+import it.uniroma3.siw.validators.CredentialsValidatorRegistration;
 import it.uniroma3.siw.validators.UserValidator;
 
 
@@ -27,7 +27,7 @@ public class AuthenticationController {
 	UserValidator userValidator;
 	
 	@Autowired
-	CredentialsValidator credentialsValidator;
+	CredentialsValidatorRegistration credentialsValidatorRegistration;
 	
 	@RequestMapping(value = { "/users/register" }, method = RequestMethod.GET)
 	public String showRegisterForm(Model model) {
@@ -44,7 +44,7 @@ public class AuthenticationController {
 								BindingResult credentialsBindingResult,
 								Model model ) {
 		this.userValidator.validate(user, userBindingResult);
-		this.credentialsValidator.validate(credentials, credentialsBindingResult);
+		this.credentialsValidatorRegistration.validate(credentials, credentialsBindingResult);
 		
 		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
 			credentials.setUser(user);
@@ -53,7 +53,5 @@ public class AuthenticationController {
 		}
 		return "registerUser";
 	}
-	
-	
 	
  }

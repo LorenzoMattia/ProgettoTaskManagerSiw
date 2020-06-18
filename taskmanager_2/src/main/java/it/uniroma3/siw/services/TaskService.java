@@ -1,6 +1,5 @@
 package it.uniroma3.siw.services;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.model.Comment;
-import it.uniroma3.siw.model.Tag;
 import it.uniroma3.siw.model.Task;
 import it.uniroma3.siw.repository.TaskRepository;
 
