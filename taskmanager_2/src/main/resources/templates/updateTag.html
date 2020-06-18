@@ -17,18 +17,18 @@
 				<table>
 					<tr>
 						<td><label for="name">Name</label></td>
-						<td><input id="name" type="text" placeholder="Tag name" required th:field="${tag.name}"/></td>
+						<td><input id="name" type="text" placeholder="Tag name" required th:field="*{name}"/></td>
 						<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="'Color:red'"></td>
 					</tr>
 					<tr>
 						<td><label for="color">Color</label></td>
-						<td><input id="color" type="text" placeholder="Tag color" th:field="${tag.color}"/></td>
-						<td th:if="${#fields.hasErrors('color')}" th:errors="color" th:style="'Color:red'"></td>
+						<td><input id="color" type="text" placeholder="Tag color" th:field="*{color}"/></td>
+						<td th:if="${#fields.hasErrors('color')}" th:errors="*{color}" th:style="'Color:red'"></td>
 					</tr>
 					<tr>
 						<td><label for="description">Description</label></td>
-						<td><input id="description" type="text" placeholder="Tag description" th:field="${tag.description}"/></td>
-						<td th:if="${#fields.hasErrors('description')}" th:errors="description" th:style="'Color:red'"></td>
+						<td><input id="description" type="text" placeholder="Tag description" th:field="*{description}"/></td>
+						<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:style="'Color:red'"></td>
 					</tr>
 					<tr>
 						<td><br/><button type="submit">Edit tag</button></td>

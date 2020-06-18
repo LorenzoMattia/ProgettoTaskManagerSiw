@@ -29,15 +29,15 @@
 				<h2>Task</h2>
 				<ul>
 					<li th:each = "task: ${project.tasks}" style="border:DOTTED; border-radius:10px; width:600px; padding:10px; margin:5px;">
-						<div th:text="${task.name}"></div>
+						<h3><div th:text="${task.name}"></div></h3>
 						<div th:text="${task.description}"></div>
 						<br/>
 						<form method="POST" th:action="@{'/tasks/delete/' + ${task.id} + '/' + ${project.id}}" style="display:inline;">
-							<button type="submit" name="submit" value="value">Elimina</button>
+							<button type="submit" style="border-color:red;">Delete</button>
 						</form>
-						<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Aggiorna</a>
-						<a th:href="'/task/viewTask/' + ${task.id} + '/' + ${project.id}">Visualizza</a>
-						<a th:href="'/task/commentForm/' + ${task.id} + '/' + ${project.id}">Commenta</a>
+						<a th:href="'/task/updateForm/' + ${task.id} + '/' + ${project.id}">Update</a>
+						<a th:href="'/task/viewTask/' + ${task.id} + '/' + ${project.id}">View</a>
+						<a th:href="'/task/commentForm/' + ${task.id} + '/' + ${project.id}">Comment</a>
 					</li>
 				</ul>
 			</div>
@@ -50,6 +50,9 @@
 						<i th:text="${tag.color}" style="margin:15px;"></i>
 						<div th:text="${tag.description}" style="margin:5px; color:black;"></div>
 						<br/>
+						<form th:action="@{'/project/' + ${project.id} + '/deleteTag/' + ${tag.id}}" method="POST" style="display:inline;">
+							<button type="submit" style="border-color:red;">Delete</button>
+						</form>
 						<a th:href="'/project/' + ${project.id} + '/editTag/' + ${tag.id}" style="margin:5px;">Edit tag</a>
 						<br/><br/>
 					</li> 
