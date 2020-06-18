@@ -41,7 +41,7 @@ public class AdminController { //non capisco se ci va
 		return "allUsers";
 	}
 	
-	@RequestMapping(value = {"/admin/users/{username}/delete" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/admin/users/{username}/delete" }, method = RequestMethod.POST)
 	public String removeUser(Model model, @PathVariable String username) {
 		this.credentialsService.deleteCredentials(username);
 		return "redirect:/admin/users";

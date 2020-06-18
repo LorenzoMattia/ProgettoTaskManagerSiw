@@ -5,11 +5,19 @@
 	<head>
 		<title>TaskManager</title>
 		<link rel="stylesheet" type="text/css" href="../../../../../../css/general.css"/>
+		<style type="text/css">
+			label{
+				font-size: 25pt;
+				color:#444488;
+			}
+		</style>
 	</head>
 
 	<body>
-		<div class="content">
+		<div class="content" style="max-width:900px;">
 			<h1>Tags of project <label th:text="${project.name}"></label> to the task <label th:text="${task.name}"></label></h1>
+			<h1 style="margin-left:300px;"><-------<br/>
+			--------></h1>
 			<table>
 				<tr>
 					<td><h2 style="margin-right:100px;">Assigned tags</h2></td><td><h2>Unassigned tags</h2></td>
@@ -18,6 +26,7 @@
 					<td>
 						<div>
 							<ul th:each="tagAdded : ${tagsAdded}">
+								<br/>
 								<li><a th:href="'/project/' + ${project.id} + '/task/' + ${task.id} + '/unassignTag/' + ${tagAdded.id}" th:text="${tagAdded.name}"></a></li>
 							</ul>
 						</div>
@@ -26,6 +35,7 @@
 						<div>
 							
 							<ul th:each="tagNotAdded : ${tagsNotAdded}">
+								<br/>
 								<li><a th:href="'/project/' + ${project.id} + '/task/' + ${task.id} + '/assignTag/' + ${tagNotAdded.id}" th:text="${tagNotAdded.name}"></a></li>
 							</ul>
 						</div>

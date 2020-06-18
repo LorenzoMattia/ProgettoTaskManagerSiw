@@ -35,6 +35,16 @@ public class TagService {
 	@Transactional
 	public void saveTag(Tag tag) {
 		this.tagRepository.save(tag);
-	}	
+	}
+	
+	@Transactional
+	public void deleteTag(Tag tag, Project project) {
+		for(Task task: tag.getTasks()) {
+			task.getTags().remove(tag);
+		}
+		tag.getTasks().clear();
+		project.getTags().remove(tag);
+		this.tagRepository.delete(tag);
+	}
 	
 }

@@ -27,6 +27,13 @@ public class CredentialsService {
 	}
 	
 	@Transactional
+	public Credentials saveCredentialsWithoutPassword(Credentials credentials) {
+		credentials.setRole(Credentials.DEFAULT_ROLE);
+		credentials.setPassword(this.getCredentials(credentials.getId()).getPassword());
+		return this.credentialsRepository.save(credentials);
+	}
+	
+	@Transactional
 	public Credentials getCredentials(Long id) {
 		Optional<Credentials> result = this.credentialsRepository.findById(id);
 		return result.orElse(null);
@@ -43,6 +50,7 @@ public class CredentialsService {
 		return (List<Credentials>) this.credentialsRepository.findAll();
 	}
 
+	@Transactional
 	public void deleteCredentials(String username) {
 		this.credentialsRepository.deleteByUsername(username);
 		

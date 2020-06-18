@@ -16,7 +16,7 @@ public class Tag {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = true, unique = true)
+	@Column(nullable = true)
 	private String name;
 	private String color;
 	private String description;
