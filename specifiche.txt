@@ -1,0 +1,65 @@
+Breve descrizione dei casi d’uso
+
+Registrazione Utente
+-	Un utente usa il sistema per registrarsi nell’app inserendo nome, cognome, username e password
+Login Utente
+-	Un utente già registrato usa il sistema per loggarsi inserendo username e password
+Logout Utente
+-	Un utente loggato sceglie di fare logout
+Visualizzazione profilo
+-	Un utente loggato sceglie di visualizzare il proprio profilo
+Aggiornamento di un profilo utente
+-	Un utente loggato aggiorna il proprio profilo utente, potendo modificare nome, cognome, username e password
+Eliminazione di un utente
+-	Un utente loggato come admin elimina un utente registrato nell’app selezionandolo da un elenco
+Visualizzazione propri progetti
+-	Un utente loggato sceglie di visualizzare i propri progetti
+Creazione di un Progetto
+-	Un utente loggato usa il sistema per creare un nuovo progetto inserendo il suo nome e una descrizione
+Eliminazione di un Progetto
+-	Il proprietario, loggato, di un progetto usa il sistema per eliminare uno dei suoi progetti selezionandolo dall’elenco dei propri progetti
+Aggiornamento di un Progetto
+-	Il proprietario, loggato, di un progetto usa il sistema per aggiornare uno dei suoi progetti selezionandolo da un elenco; potendo modificare il nome e la descrizione
+Condivisione di un Progetto
+-	Il proprietario, loggato, di un progetto usa il sistema per condividere (o togliere la condivisione) un suo progetto con un altro utente registrato nell’applicazione
+Visualizzazione di un Progetto
+-	Un utente usa il sistema per visualizzare uno dei progetti di cui è proprietario selezionandolo da un elenco
+Visione dei progetti condivisi con sé stesso
+-	Un utente, loggato, usa il sistema per visionare i progetti che altri utenti hanno condiviso con lui
+Creazione di un Task all’interno di un Progetto
+-	Un utente loggato seleziona uno dei progetti di cui è proprietario
+-	L’utente sceglie di creare un task nel progetto selezionato inserendo nome e descrizione
+Aggiornamento di un Task
+-	Un utente loggato seleziona uno dei progetti di cui è proprietario
+-	L’utente sceglie il task che vuole aggiornare selezionandolo da un elenco
+-	L’utente aggiorna il task inserendo i nuovi nome e descrizione
+Eliminazione di un Task
+-	Un utente loggato seleziona uno dei progetti di cui è proprietario
+-	L’utente elimina un task sceglie 
+Visualizzazione di un Task
+-	Un utente loggato seleziona uno dei progetti di cui è proprietario
+-	L’utente seleziona il task che vuole visualizzare selezionandolo da un elenco
+Assegnazione di un Task di un progetto ad un utente con cui il progetto è stato condiviso
+-	Un utente loggato seleziona uno dei progetti di cui è proprietario
+-	L’utente seleziona il task che vuole condividere scegliendolo da un elenco
+-	L’utente seleziona l’utente a cui vuole assegnare il task selezionandolo da un elenco
+Commentare un Task
+-	Un utente loggato visualizza i progetti che sono stati condivisi con lui
+-	L’utente seleziona uno dei progetti selezionandolo da un elenco
+-	L’utente sceglie di commentare uno dei task del progetto selezionato
+-	L’utente inserisce il corpo del commento
+Creazione di un Tag
+-	Un utente, loggato, seleziona uno dei progetti di cui è proprietario scegliendolo da un elenco
+-	L’utente sceglie di creare un nuovo tag inserendo nome, colore e descrizione
+Eliminazione di un Tag
+-	Un utente, loggato, seleziona uno dei progetti di cui è proprietario scegliendolo da un elenco
+-	L’utente sceglie l’attività elimina tag relativamente al tag che vuole eliminare
+Aggiornamento di un Tag
+-	Un utente, loggato, seleziona uno dei progetti di cui è proprietario scegliendolo da un elenco
+-	L’utente sceglie l’attività aggiorna tag relativamente al tag che vuole eliminare
+-	L’utente aggiorna il tag inserendo nome, colore e descrizione
+Assegnazione di un Tag ad un Task
+-	Un utente, loggato, seleziona uno dei progetti di cui è proprietario scegliendolo da un elenco
+-	L’utente seleziona uno dei task del progetto scegliendolo da un elenco
+-	L’utente sceglie l’attività di gestire i tag
+-	L’utente assegna (o rimuove l’assegnazione) un tag, selezionandolo dall’elenco dei task del progetto, al task scelto
